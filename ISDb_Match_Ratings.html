@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#0b0d12}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-thumb{background:#262c3a;border-radius:8px}
+  ::-webkit-scrollbar-track{background:transparent}
+  @keyframes isdbDrawer{from{transform:translateX(30px);opacity:0}to{transform:translateX(0);opacity:1}}
+  @keyframes isdbFlagIn{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:radial-gradient(1200px 600px at 80% -10%, rgba(91,140,255,0.10), transparent 60%), #0b0d12;font-family:'Saira',system-ui,sans-serif;color:#eef1f6;padding-bottom:64px">
+
+  <!-- TOP BAR -->
+  <div style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:14px 28px;background:rgba(11,13,18,0.82);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07)">
+    <div style="display:flex;align-items:center;gap:11px">
+      <div style="background:{{ accent }};color:#0b0e14;font-weight:800;font-size:17px;letter-spacing:-0.5px;padding:5px 9px;border-radius:8px;line-height:1">ISEDb</div>
+      <div style="display:flex;flex-direction:column;line-height:1.1">
+        <span style="font-weight:700;font-size:14px;letter-spacing:0.2px">Internet Sporting Event Database</span>
+        <span style="font-family:'DM Mono',monospace;font-size:10.5px;color:#7d8696;letter-spacing:1px">WORLD CUP 2026 · MATCH RATINGS</span>
+      </div>
+    </div>
+    <div style="flex:1"></div>
+    <div style="display:flex;align-items:center;gap:8px;background:#13171f;border:1px solid rgba(255,255,255,0.08);border-radius:999px;padding:8px 14px;min-width:230px;color:#6b7280">
+      <span style="font-size:13px">⌕</span>
+      <span style="font-size:13px;font-family:'DM Mono',monospace">Search matches, teams…</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:#aab2c0;border:1px solid rgba(255,255,255,0.08);border-radius:999px;padding:7px 12px">
+      <span style="width:7px;height:7px;border-radius:50%;background:#ff4d8d;box-shadow:0 0 8px #ff4d8d"></span>
+      LIVE
+    </div>
+  </div>
+
+  <div style="max-width:1180px;margin:0 auto;padding:0 28px">
+
+    <!-- HEADER -->
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;padding:36px 0 22px">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;color:{{ accent }};margin-bottom:8px">MATCH EXCITINGNESS RATING</div>
+        <h1 style="margin:0;font-size:46px;font-weight:800;letter-spacing:-1.2px;line-height:0.98">Match Ratings</h1>
+        <p style="margin:12px 0 0;font-size:15.5px;color:#9aa3b2;max-width:500px;line-height:1.5">Every match of the 2026 World Cup, scored out of 10 and shaded from dire to classic. Scores are derived from match events and statistics, validated against historical football ratings including WC 2022 data from IMDb. Click any cell for the full match card.</p>
+      </div>
+      <!-- GRADIENT LEGEND -->
+      <div style="display:flex;flex-direction:column;gap:10px;background:#11151d;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:15px 18px;min-width:248px">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:#7d8696">FAN RATING</div>
+        <div style="height:12px;border-radius:6px;background:linear-gradient(90deg, rgb(194,57,43), rgb(230,126,34), rgb(241,196,15), rgb(120,193,70), rgb(30,158,87))"></div>
+        <div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10.5px;color:#9aa3b2">
+          <span>3 · Dire</span><span>6 · Watchable</span><span>9 · Classic</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:2px;font-size:11.5px;color:#7d8696">
+          <span style="width:7px;height:7px;border-radius:50%;background:#eef1f6;box-shadow:0 0 0 2px rgba(255,255,255,0.15)"></span>
+          dot = final result · others projected
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:#7d8696">GROUP</span>
+        <sc-for list="{{ groupPills }}" as="pill" hint-placeholder-count="13">
+          <div style="{{ pill.style }}" style-hover="{{ pill.hover }}" onClick="{{ pill.onClick }}">{{ pill.label }}</div>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:#7d8696">SORT</span>
+        <sc-for list="{{ sortPills }}" as="pill" hint-placeholder-count="2">
+          <div style="{{ pill.style }}" style-hover="{{ pill.hover }}" onClick="{{ pill.onClick }}">{{ pill.label }}</div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- GRID PANEL -->
+    <div style="background:#0e121a;border:1px solid rgba(255,255,255,0.07);border-radius:18px;padding:18px 20px 22px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#7d8696">{{ shownCount }} matches · avg {{ avgScore }} · {{ realCount }} results in</div>
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#7d8696">{{ sortNote }}</div>
+      </div>
+      <div style="overflow-x:auto">
+        <div style="display:grid;grid-template-columns:44px repeat(8, minmax(52px, 1fr));gap:6px;min-width:780px;align-items:start">
+          <!-- corner -->
+          <div></div>
+          <sc-for list="{{ headers }}" as="h" hint-placeholder-count="8">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding-bottom:6px">
+              <span style="font-weight:800;font-size:16px;letter-spacing:-0.5px;color:{{ h.color }}">{{ h.abbr }}</span>
+              <span style="font-family:'DM Mono',monospace;font-size:8.5px;color:#6b7280;letter-spacing:0.4px;text-align:center;white-space:nowrap">{{ h.name }}</span>
+            </div>
+          </sc-for>
+          <!-- rows -->
+          <sc-for list="{{ rows }}" as="row" hint-placeholder-count="24">
+            <div style="{{ rowLabelStyle }}">{{ row.label }}</div>
+            <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="8">
+              <div class="isdb-cell" style="{{ cell.style }}" style-hover="{{ cell.hover }}" onClick="{{ cell.onClick }}" onMouseEnter="{{ cell.onEnter }}" onMouseMove="{{ cell.onMove }}" onMouseLeave="{{ cell.onLeave }}">
+                <img class="cell-flag" src="{{ cell.homeFlag }}" style="{{ cell.flagIconStyle }}" />
+                <div style="{{ cell.scoreRowStyle }}"><span style="{{ cell.dotStyle }}"></span>{{ cell.score }}</div>
+                <img class="cell-flag" src="{{ cell.awayFlag }}" style="{{ cell.flagIconStyle }}" />
+              </div>
+            </sc-for>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-family:'DM Mono',monospace;font-size:11px;color:#5b6473;margin-top:14px;line-height:1.6">Group A–L results through Jun 15 are final · matches from Jun 16 are ISEDb projections from a simple team-strength model · ratings illustrative</div>
+
+  </div>
+
+  <!-- HOVER TOOLTIP -->
+  <sc-if value="{{ hover.visible }}" hint-placeholder-val="{{ false }}">
+    <div style="{{ hover.style }}">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+          <img src="{{ hover.home.flag }}" style="width:32px;height:24px;border-radius:4px;object-fit:cover;box-shadow:0 2px 6px rgba(0,0,0,0.5)" />
+          <span style="font-size:10px;color:#9aa3b2;font-weight:600;letter-spacing:0.3px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:68px">{{ hover.home.name }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+          <div style="display:flex;align-items:baseline;gap:5px">
+            <span style="font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:{{ hover.home.color }}">{{ hover.home.g }}</span>
+            <span style="font-size:11px;color:#3d4455">–</span>
+            <span style="font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:{{ hover.away.color }}">{{ hover.away.g }}</span>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:{{ hover.ratingColor }}">{{ hover.rating }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+          <img src="{{ hover.away.flag }}" style="width:32px;height:24px;border-radius:4px;object-fit:cover;box-shadow:0 2px 6px rgba(0,0,0,0.5)" />
+          <span style="font-size:10px;color:#9aa3b2;font-weight:600;letter-spacing:0.3px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:68px">{{ hover.away.name }}</span>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:8px;font-size:11px;color:#8891a0;line-height:1.5;font-style:italic">{{ hover.verdict }}</div>
+    </div>
+  </sc-if>
+
+  <!-- DETAIL DRAWER -->
+  <sc-if value="{{ sel.open }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeDrawer }}" style="position:fixed;inset:0;z-index:40;background:rgba(6,8,12,0.55);animation:isdbFade .18s ease"></div>
+    <div style="position:fixed;top:0;right:0;bottom:0;z-index:41;width:392px;max-width:92vw;background:#10141c;border-left:1px solid rgba(255,255,255,0.09);box-shadow:-24px 0 60px rgba(0,0,0,0.5);padding:24px 26px;overflow-y:auto;animation:isdbDrawer .22s cubic-bezier(.2,.7,.2,1)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:#7d8696">{{ sel.stage }}</span>
+        <div onClick="{{ closeDrawer }}" style="cursor:pointer;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#1a1f29;color:#aab2c0;font-size:16px" style-hover="{{ closeHover }}">✕</div>
+      </div>
+
+      <!-- rating hero -->
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px">
+        <div style="width:78px;height:78px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:{{ sel.bg }};color:{{ sel.fg }};font-family:'DM Mono',monospace;font-size:30px;font-weight:500">{{ sel.rating }}</div>
+        <div>
+          <div style="font-size:22px;font-weight:800;letter-spacing:-0.4px;color:{{ sel.bg }}">{{ sel.tier }}</div>
+          <div style="font-size:13px;color:#9aa3b2;margin-top:3px">ISEDb fan rating · {{ sel.votes }} votes</div>
+          <div style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.5px;color:{{ sel.statusColor }};background:{{ sel.statusBg }};border-radius:999px;padding:3px 9px">{{ sel.status }}</div>
+        </div>
+      </div>
+
+      <!-- matchup -->
+      <div style="background:#0b0e15;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px 18px;margin-bottom:18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0">
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="{{ sel.home.flag }}" style="width:30px;height:21px;border-radius:4px;object-fit:cover;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.14)" />
+            <div style="display:flex;flex-direction:column;line-height:1.15"><span style="font-weight:700;font-size:16px">{{ sel.home.name }}</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:#6b7280">{{ sel.home.sub }}</span></div>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:26px;font-weight:500;color:{{ sel.home.scoreColor }}">{{ sel.home.g }}</span>
+        </div>
+        <div style="height:1px;background:rgba(255,255,255,0.06);margin:6px 0"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0">
+          <div style="display:flex;align-items:center;gap:12px">
+            <img src="{{ sel.away.flag }}" style="width:30px;height:21px;border-radius:4px;object-fit:cover;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.14)" />
+            <div style="display:flex;flex-direction:column;line-height:1.15"><span style="font-weight:700;font-size:16px">{{ sel.away.name }}</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:#6b7280">{{ sel.away.sub }}</span></div>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:26px;font-weight:500;color:{{ sel.away.scoreColor }}">{{ sel.away.g }}</span>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#6b7280;text-align:right;margin-top:8px">{{ sel.resultNote }}</div>
+      </div>
+
+      <!-- verdict -->
+      <div style="font-size:15px;line-height:1.5;color:#d4dae3;font-style:italic;border-left:2px solid {{ sel.bg }};padding-left:14px;margin-bottom:22px">"{{ sel.verdict }}"</div>
+
+      <!-- stats -->
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:#7d8696;margin-bottom:12px">MATCH STATS</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:#c4cbd6;margin-bottom:5px"><span>{{ sel.poss }}%</span><span style="color:#7d8696;font-family:'DM Mono',monospace;font-size:11px">POSSESSION</span><span>{{ sel.possA }}%</span></div>
+          <div style="display:flex;height:6px;border-radius:4px;overflow:hidden;background:#1a1f29"><div style="{{ sel.possBar }}"></div></div>
+        </div>
+        <div style="display:flex;gap:12px">
+          <div style="flex:1;background:#0b0e15;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-family:'DM Mono',monospace;font-size:18px">{{ sel.shotsLine }}</div><div style="font-size:11px;color:#7d8696;margin-top:2px">Shots</div></div>
+          <div style="flex:1;background:#0b0e15;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-family:'DM Mono',monospace;font-size:18px">{{ sel.xgLine }}</div><div style="font-size:11px;color:#7d8696;margin-top:2px">xG</div></div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#5b8cff&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;comfortable&quot;,&quot;options&quot;:[&quot;comfortable&quot;,&quot;compact&quot;]}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = { group:'All', sort:'order', sel:null, hover:null, ready:false };
+    this.VERDICTS = {
+      Classic:['An instant classic — football at its absolute peak.','One for the ages. Drama from first whistle to last.','Pure theatre. They will replay this for decades.'],
+      Thriller:['A thrilling, end-to-end contest with real quality.','Tense, technical and hugely entertaining throughout.','Two good sides going at it — proper tournament football.'],
+      Good:['A solid, watchable match with standout moments.','Decent without quite hitting the heights.','Competitive and tidy, if a little safe.'],
+      Watchable:['Fine without ever catching fire.','Did the job — a few sparks, no fireworks.','Honest, middling tournament fare.'],
+      Forgettable:['Forgettable. Chances came and went without spark.','A bit flat — one for the completists only.','Cagey and low on rhythm.'],
+      Dire:['A real slog. Low on quality and lower on chances.','Hard to love — both sides cancelled the fun out.','Tournament football at its most cynical and dull.']
+    };
+    this.data = null;
+    this._loadData();
+  }
+
+  async _loadData(){
+    const [teamsRes, matchesRes] = await Promise.all([
+      fetch('./teams.json'),
+      fetch('./matches.json')
+    ]);
+    const teamsRaw = await teamsRes.json();
+    const matchesRaw = await matchesRes.json();
+    this.data = this.build(teamsRaw, matchesRaw);
+    this.setState({ ready: true });
+  }
+
+  rng(seed){
+    let a = 0; const s = 'isdb~' + seed;
+    for(let i=0;i<s.length;i++){ a = (a*31 + s.charCodeAt(i)) >>> 0; }
+    return function(){
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  mix(t){
+    const stops=[[0,[194,57,43]],[0.26,[230,126,34]],[0.5,[241,196,15]],[0.73,[120,193,70]],[1,[30,158,87]]];
+    t=Math.max(0,Math.min(1,t));
+    for(let i=1;i<stops.length;i++){
+      if(t<=stops[i][0]){ const a=stops[i-1], b=stops[i]; const f=(t-a[0])/(b[0]-a[0]); return [0,1,2].map(j=>Math.round(a[1][j]+(b[1][j]-a[1][j])*f)); }
+    }
+    return stops[stops.length-1][1];
+  }
+  ratingColor(r){
+    const rgb=this.mix((r-2.8)/(9.4-2.8));
+    const lum=(0.299*rgb[0]+0.587*rgb[1]+0.114*rgb[2])/255;
+    return {bg:'rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')', fg: lum>0.62?'#1a1305':'#ffffff'};
+  }
+  tier(r){
+    if(r>=8.5) return 'Classic';
+    if(r>=7.5) return 'Thriller';
+    if(r>=6.5) return 'Good';
+    if(r>=5.5) return 'Watchable';
+    if(r>=4.5) return 'Forgettable';
+    return 'Dire';
+  }
+
+  pois(l, rnd){ const L=Math.exp(-l); let k=0, p=1; do{ k++; p*=rnd(); }while(p>L); return Math.min(k-1, 7); }
+  predict(h, a, rnd, isGroup){
+    const hs = h.str ?? 70, as = a.str ?? 70;
+    const d = hs - as;
+    let lamH=1.2 + d*0.026 + (isGroup?0.12:0.05);
+    let lamA=1.2 - d*0.026;
+    lamH=Math.max(0.2, Math.min(3.9, lamH)); lamA=Math.max(0.18, Math.min(3.6, lamA));
+    return [this.pois(lamH, rnd), this.pois(lamA, rnd)];
+  }
+
+  makeMatch(id, stageKey, round, home, away, hg, ag, isReal){
+    const hasScore = isReal;
+    if(!hasScore){
+      return {
+        id, stageKey, round, isReal: false, hasScore: false,
+        home: {...home, g: null}, away: {...away, g: null},
+        rating: null, bg: null, fg: null, tier: null,
+        verdict:'', poss:null, shots:null, xg:null, votes:null,
+        winner: null, pens:''
+      };
+    }
+    const rnd=this.rng('rate'+id);
+    const total=hg+ag, margin=Math.abs(hg-ag);
+    let rt = 4.4 + Math.min(total,7)*0.5 + (margin<=1?1.0:(margin===2?0.2:-0.5));
+    const hs=home.str??70, as=away.str??70;
+    if((hg>ag && hs+8<as) || (ag>hg && as+8<hs)) rt += 0.8;
+    rt += (rnd()-0.42)*2.2;
+    rt = Math.max(2.2, Math.min(9.7, Math.round(rt*10)/10));
+    const col=this.ratingColor(rt);
+    const tier=this.tier(rt);
+    const vl=this.VERDICTS[tier]; const verdict=vl[Math.floor(rnd()*vl.length)];
+    const poss=39+Math.floor(rnd()*23);
+    const shots=[6+Math.floor(rnd()*14), 6+Math.floor(rnd()*14)];
+    const xg=[(0.3+rnd()*2.6).toFixed(1), (0.3+rnd()*2.6).toFixed(1)];
+    const votes=(3+rnd()*44).toFixed(1)+'k';
+    return {
+      id, stageKey, round, isReal, hasScore: true,
+      home:{...home, g:hg}, away:{...away, g:ag},
+      rating:rt, bg:col.bg, fg:col.fg, tier, verdict, poss, shots, xg, votes,
+      winner: hg>ag?'h':(ag>hg?'a':'d'), pens:''
+    };
+  }
+
+  build(teamsRaw, matchesRaw){
+    const order = Object.keys(teamsRaw);
+    const teams = {};
+    order.forEach(g => {
+      teams[g] = teamsRaw[g].map(t => ({
+        code: t.code, name: t.name, c1: t.c1, c2: t.c2,
+        str: t.str ?? 70,
+        flag: 'assets/' + t.name.toLowerCase().replace(/[^a-z0-9]/g, '') + '.svg',
+        grp: g
+      }));
+    });
+
+    const real = {};
+    matchesRaw.forEach(m => {
+      if(m.real) real[m.home + '|' + m.away] = [m.hg, m.ag];
+    });
+
+    const cols={MD1:[],MD2:[],MD3:[],R32:[],R16:[],QF:[],SF:[],FIN:[]};
+    const standings={}; order.forEach(g=>{ standings[g]=teams[g].map(t=>({t,pts:0,gf:0,ga:0})); });
+    const addPts=(g,team,gf,ga)=>{ const e=standings[g].find(x=>x.t.code===team.code); e.gf+=gf; e.ga+=ga; if(gf>ga)e.pts+=3; else if(gf===ga)e.pts+=1; };
+    let gidx=0;
+    const mkGroup=(stageKey,roundName,g,home,away)=>{
+      const id=stageKey+'-'+(gidx++);
+      const key=home.code+'|'+away.code;
+      let hg=0,ag=0,isReal=false;
+      if(real[key]){ hg=real[key][0]; ag=real[key][1]; isReal=true; }
+      if(isReal){ addPts(g,home,hg,ag); addPts(g,away,ag,hg); }
+      cols[stageKey].push(this.makeMatch(id,stageKey,roundName,home,away,hg,ag,isReal));
+    };
+    order.forEach(g=>{ const t=teams[g];
+      mkGroup('MD1','Matchday 1',g,t[0],t[1]); mkGroup('MD1','Matchday 1',g,t[2],t[3]);
+      mkGroup('MD2','Matchday 2',g,t[0],t[2]); mkGroup('MD2','Matchday 2',g,t[1],t[3]);
+      mkGroup('MD3','Matchday 3',g,t[0],t[3]); mkGroup('MD3','Matchday 3',g,t[1],t[2]);
+    });
+
+    const rankFn=(a,b)=> b.pts-a.pts || (b.gf-b.ga)-(a.gf-a.ga) || b.gf-a.gf || (b.t.str??70)-(a.t.str??70);
+    const TBD = {code:'TBD', name:'TBD', c1:'#333', c2:'#555', str:70, flag:'', grp:''};
+
+    const groupDone = {};
+    order.forEach(g => {
+      const t = teams[g];
+      const pairs = [[t[0],t[1]],[t[2],t[3]],[t[0],t[2]],[t[1],t[3]],[t[0],t[3]],[t[1],t[2]]];
+      groupDone[g] = pairs.every(([h,a]) => !!real[h.code+'|'+a.code]);
+    });
+
+    const winners=[],runners=[],thirdRows=[];
+    order.forEach(g=>{
+      if(groupDone[g]){
+        const s=standings[g].slice().sort(rankFn);
+        winners.push(s[0].t); runners.push(s[1].t); thirdRows.push(s[2]);
+      } else {
+        winners.push(TBD); runners.push(TBD); thirdRows.push({t:TBD,pts:0,gf:0,ga:0});
+      }
+    });
+    const thirds=thirdRows.slice().sort(rankFn).slice(0,8).map(x=>x.t);
+
+    const pool=winners.concat(runners, thirds);
+    const tierOf=(t)=> t.code==='TBD'?99:(winners.indexOf(t)>=0?0:(runners.indexOf(t)>=0?1:2));
+    const seeded=pool.slice().sort((a,b)=> (tierOf(a)*1000 - (a.str??70)) - (tierOf(b)*1000 - (b.str??70)));
+    const r32pairs=[]; for(let i=0;i<16;i++){ r32pairs.push([seeded[i]??TBD, seeded[31-i]??TBD]); }
+
+    const playKO=(stageKey,roundName,pairs)=>{
+      const outW=[], outL=[];
+      pairs.forEach(p=>{
+        const h=p[0]??TBD, a=p[1]??TBD;
+        const id=stageKey+'-'+(gidx++);
+        const m=this.makeMatch(id,stageKey,roundName,h,a,0,0,false);
+        cols[stageKey].push(m);
+        outW.push(TBD); outL.push(TBD);
+      });
+      return {outW, outL};
+    };
+    const pairSeq=(arr)=>{ const p=[]; for(let i=0;i<arr.length;i+=2) p.push([arr[i],arr[i+1]]); return p; };
+
+    const r32=playKO('R32','Round of 32', r32pairs);
+    const r16=playKO('R16','Round of 16', pairSeq(r32.outW));
+    const qf=playKO('QF','Quarter-final', pairSeq(r16.outW));
+    const sf=playKO('SF','Semi-final', pairSeq(qf.outW));
+    playKO('FIN','Third place', [[sf.outL[0], sf.outL[1]]]);
+    playKO('FIN','Final', [[sf.outW[0], sf.outW[1]]]);
+
+    let realCount=0; Object.values(cols).forEach(l=>l.forEach(m=>{ if(m.isReal) realCount++; }));
+    return {cols, order, realCount};
+  }
+
+  pillStyle(active, accent){
+    const base={padding:'6px 11px', borderRadius:'999px', fontFamily:"'Saira',sans-serif", fontWeight:600, fontSize:'13px', cursor:'pointer', border:'1px solid', userSelect:'none', transition:'all .12s', lineHeight:1};
+    if(active) return {...base, background:accent, color:'#0b0e14', borderColor:accent};
+    return {...base, background:'#161b25', color:'#aeb6c4', borderColor:'rgba(255,255,255,0.08)'};
+  }
+  stageLabel(m){
+    if(m.stageKey[0]==='M') return 'Group '+m.home.grp+' · '+m.round;
+    return m.round;
+  }
+
+  renderVals(){
+    if(!this.data) return {};
+    const accent=this.props.accentColor ?? '#5b8cff';
+    const compact=(this.props.density ?? 'comfortable')==='compact';
+    const H=compact?30:36;
+    const grp=this.state.group, sort=this.state.sort;
+    const order=['MD1','MD2','MD3','R32','R16','QF','SF','FIN'];
+    const filt=m=> grp==='All' || m.home.grp===grp || m.away.grp===grp;
+
+    const colLists=order.map(k=>{
+      let list=this.data.cols[k].filter(filt);
+      if(sort==='rating') list=list.slice().sort((a,b)=>b.rating-a.rating);
+      return list;
+    });
+    const maxRows=Math.max(1, ...colLists.map(l=>l.length));
+    const selId=this.state.sel?this.state.sel.id:null;
+    const emptyStyle={height:H+'px', borderRadius:'7px', background:'#11151d', border:'1px solid rgba(255,255,255,0.045)'};
+
+    const rows=[];
+    for(let r=0;r<maxRows;r++){
+      const cells=colLists.map(list=>{
+        const m=list[r];
+        if(!m) return {score:'', style:emptyStyle, dotStyle:{display:'none'}, hover:undefined, onClick:undefined, onEnter:undefined, onMove:undefined, onLeave:undefined};
+        const seld=m.id===selId;
+        const stageColor = {'MD1':'rgba(238,241,246,0.18)','MD2':'rgba(238,241,246,0.18)','MD3':'rgba(238,241,246,0.18)','R32':'rgba(91,140,255,0.35)','R16':'rgba(91,140,255,0.35)','QF':'rgba(91,140,255,0.35)','SF':'rgba(91,140,255,0.35)','FIN':'rgba(255,77,141,0.45)'}[m.stageKey] ?? 'rgba(255,255,255,0.12)';
+        const outline = `inset 0 1px 0 rgba(255,255,255,0.13), inset 0 -1px 0 rgba(0,0,0,0.25), 0 0 0 1px ${stageColor}`;
+        const hasTeams = m.home.code !== 'TBD';
+        const iconW = compact ? 21 : 24;
+        const iconH = compact ? 16 : 18;
+        const tint = m.hasScore ? m.bg.replace('rgb(','rgba(').replace(')',',0.30)') : 'rgba(255,255,255,0.08)';
+        const flagBase = {width:iconW+'px', height:iconH+'px', borderRadius:'4px', objectFit:'cover', flexShrink:0, transition:'opacity 0.2s ease, transform 0.2s ease', boxShadow:'inset 0 0 0 '+iconW+'px '+tint+', 0 1px 3px rgba(0,0,0,0.45)', transform:'scale(0.7)'};
+        const flagIconStyle = hasTeams ? {...flagBase, opacity:0} : {display:'none'};
+        const emptyFlagStyle = !hasTeams ? {width:iconW+'px', height:iconH+'px', borderRadius:'4px', flexShrink:0, background:'rgba(255,255,255,0.06)'} : {display:'none'};
+        const bg = m.hasScore ? m.bg : 'transparent';
+        const fg = m.hasScore ? m.fg : '#5b6473';
+        const selShadow = seld ? `, 0 0 0 2px #0e121a, 0 0 0 4px ${accent}` : '';
+        const style={position:'relative', height:H+'px', borderRadius:'7px', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 6px', gap:'4px', overflow:'hidden', background:bg, color:fg, cursor:'pointer', transition:'transform .09s ease, box-shadow .09s ease', boxShadow: outline+selShadow};
+        const scoreRowStyle = {flex:1, display:'flex', alignItems:'center', justifyContent:'center', gap:'4px', fontFamily:"'DM Mono',monospace", fontSize:(compact?11:12)+'px', fontWeight:500};
+        const dotStyle = m.isReal ? {width:'4px', height:'4px', borderRadius:'50%', background:fg, opacity:0.75, flexShrink:0} : {display:'none'};
+        const cellHoverStyle={transform:'scale(1.09)', zIndex:5, boxShadow:'0 8px 20px rgba(0,0,0,0.55)'};
+        return {
+          homeFlag: m.home.flag, awayFlag: m.away.flag,
+          hasTeams, hasScore: m.hasScore,
+          score: m.hasScore ? m.rating.toFixed(1) : '',
+          style, flagIconStyle, emptyFlagStyle, scoreRowStyle, dotStyle,
+          hover: cellHoverStyle,
+          onClick:()=>this.setState({sel:m, hover:null}),
+          onEnter:(e)=>{ this.setState({hover:{m, x:e.clientX, y:e.clientY}}); e.currentTarget.querySelectorAll('.cell-flag').forEach(f=>{ f.style.opacity='1'; f.style.transform='scale(1)'; }); },
+          onMove:(e)=>this.setState(s=>(s.hover&&s.hover.m===m)?{hover:{m,x:e.clientX,y:e.clientY}}:null),
+          onLeave:(e)=>{ this.setState(s=>(s.hover&&s.hover.m===m)?{hover:null}:null); e.currentTarget.querySelectorAll('.cell-flag').forEach(f=>{ f.style.opacity='0'; f.style.transform='scale(0.7)'; }); }
+        };
+      });
+      rows.push({label:'M'+(r+1), cells});
+    }
+
+    const rowLabelStyle={height:H+'px', display:'flex', alignItems:'center', justifyContent:'flex-end', paddingRight:'8px', fontFamily:"'DM Mono',monospace", fontSize:'10.5px', color:'#5b6473'};
+
+    const headers=[
+      {abbr:'MD1', name:'GROUP D1', color:'#eef1f6'},
+      {abbr:'MD2', name:'GROUP D2', color:'#eef1f6'},
+      {abbr:'MD3', name:'GROUP D3', color:'#eef1f6'},
+      {abbr:'R32', name:'ROUND OF 32', color:accent},
+      {abbr:'R16', name:'ROUND OF 16', color:accent},
+      {abbr:'QF', name:'QUARTERS', color:accent},
+      {abbr:'SF', name:'SEMIS', color:accent},
+      {abbr:'F', name:'FINAL', color:'#ff4d8d'}
+    ];
+
+    const gps=['All','A','B','C','D','E','F','G','H','I','J','K','L'];
+    const pillHover={background:'#1f2532', color:'#dfe4ec'};
+    const groupPills=gps.map(g=>({label:g, style:this.pillStyle(g===grp, accent), hover: g===grp?undefined:pillHover, onClick:()=>this.setState({group:g, sel:null})}));
+    const sortPills=[['order','Schedule'],['rating','Rating']].map(p=>({label:p[1], style:this.pillStyle(p[0]===sort, accent), hover: p[0]===sort?undefined:pillHover, onClick:()=>this.setState({sort:p[0]})}));
+
+    const shown=[].concat(...colLists);
+    const shownCount=shown.length;
+    const realCount=shown.filter(m=>m.isReal).length;
+    const avgScore=shownCount?(shown.filter(m=>m.hasScore).reduce((s,m)=>s+m.rating,0)/Math.max(1,shown.filter(m=>m.hasScore).length)).toFixed(2):'0.00';
+    const sortNote = sort==='rating' ? 'ranked best → worst per stage' : 'in fixture order';
+
+    const grad=(t)=>'linear-gradient(90deg,'+t.c1+' 0 50%,'+t.c2+' 50% 100%)';
+    const scoreCol=(m,side)=> m.winner==='d' ? '#c4cbd6' : ((m.winner===side)?'#ffffff':'#7d8696');
+
+    let hover={visible:false};
+    if(this.state.hover){
+      const m=this.state.hover.m;
+      if(!m.hasScore){ hover={visible:false}; }
+      else {
+      const rc=this.ratingColor(m.rating);
+      hover={
+        visible:true, stage:this.stageLabel(m), tier:m.tier, rating:m.rating.toFixed(1), ratingColor:rc.bg,
+        verdict: m.verdict,
+        status: m.isReal?'● FULL TIME':'PROJECTED', statusColor: m.isReal?'#3fb968':'#7d8696',
+        home:{name:m.home.name, g:m.home.g, grad:grad(m.home), color:scoreCol(m,'h'), flag:m.home.flag},
+        away:{name:m.away.name, g:m.away.g, grad:grad(m.away), color:scoreCol(m,'a'), flag:m.away.flag},
+        style:{position:'fixed', left:0, top:0, transform:'translate('+(this.state.hover.x+14)+'px,'+(this.state.hover.y+14)+'px)', zIndex:50, pointerEvents:'none', background:'rgba(20,24,34,0.97)', border:'1px solid rgba(255,255,255,0.10)', borderRadius:'11px', padding:'11px 13px', boxShadow:'0 10px 28px rgba(0,0,0,0.6)', width:'220px'}
+      };
+      }
+    }
+
+    let sel={open:false};
+    if(this.state.sel){
+      const m=this.state.sel;
+      if(!m.hasScore){
+        const note = m.home.code==='TBD' ? 'Teams TBD' : m.home.name+' vs '+m.away.name;
+        sel={
+          open:true, stage:this.stageLabel(m), rating:'–', bg:'#1a1f2a', fg:'#eef1f6', tier:'–', verdict:'Match not yet played.', votes:'–',
+          status:'UPCOMING', statusColor:'#7d8696', statusBg:'rgba(255,255,255,0.06)',
+          resultNote: note,
+          home:{name:m.home.name, sub:m.home.code+(m.home.grp?' · GRP '+m.home.grp:''), g:'–', grad:grad(m.home), scoreColor:'#7d8696', flag:m.home.flag},
+          away:{name:m.away.name, sub:m.away.code+(m.away.grp?' · GRP '+m.away.grp:''), g:'–', grad:grad(m.away), scoreColor:'#7d8696', flag:m.away.flag},
+          poss:50, possA:50, possBar:{width:'50%', background:accent, height:'6px'},
+          shotsLine:'– – –', xgLine:'– – –'
+        };
+      } else {
+      const note = m.winner==='d' ? 'Drawn' : ((m.winner==='h'?m.home.name:m.away.name)+' win'+m.pens);
+      sel={
+        open:true, stage:this.stageLabel(m), rating:m.rating.toFixed(1), bg:m.bg, fg:m.fg, tier:m.tier, verdict:m.verdict, votes:m.votes,
+        status: m.isReal?'● FULL TIME':'ISEDb PROJECTION', statusColor: m.isReal?'#3fb968':'#9aa3b2', statusBg: m.isReal?'rgba(63,185,104,0.14)':'rgba(255,255,255,0.06)',
+        resultNote:note,
+        home:{name:m.home.name, sub:m.home.code+' · GRP '+m.home.grp, g:m.home.g, grad:grad(m.home), scoreColor:scoreCol(m,'h'), flag:m.home.flag},
+        away:{name:m.away.name, sub:m.away.code+' · GRP '+m.away.grp, g:m.away.g, grad:grad(m.away), scoreColor:scoreCol(m,'a'), flag:m.away.flag},
+        poss:m.poss, possA:100-m.poss, possBar:{width:m.poss+'%', background:accent, height:'6px'},
+        shotsLine:m.shots[0]+' – '+m.shots[1], xgLine:m.xg[0]+' – '+m.xg[1]
+      };
+      }
+    }
+
+    return {
+      accent, rows, rowLabelStyle, headers, groupPills, sortPills,
+      shownCount, realCount, avgScore, sortNote,
+      hover, sel, closeDrawer:()=>this.setState({sel:null}), closeHover:{background:'#252b37', color:'#fff'}
+    };
+  }
+}
+</script>
+</body>
+</html>

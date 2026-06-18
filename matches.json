@@ -1,0 +1,18 @@
+[
+  { "home": "MEX", "away": "RSA", "hg": 2, "ag": 0, "real": true },
+  { "home": "KOR", "away": "CZE", "hg": 2, "ag": 1, "real": true },
+  { "home": "CAN", "away": "BIH", "hg": 1, "ag": 1, "real": true },
+  { "home": "QAT", "away": "SUI", "hg": 1, "ag": 1, "real": true },
+  { "home": "BRA", "away": "MAR", "hg": 1, "ag": 1, "real": true },
+  { "home": "HAI", "away": "SCO", "hg": 0, "ag": 1, "real": true },
+  { "home": "USA", "away": "PAR", "hg": 4, "ag": 1, "real": true },
+  { "home": "AUS", "away": "TUR", "hg": 2, "ag": 0, "real": true },
+  { "home": "GER", "away": "CUW", "hg": 7, "ag": 1, "real": true },
+  { "home": "CIV", "away": "ECU", "hg": 1, "ag": 0, "real": true },
+  { "home": "NED", "away": "JPN", "hg": 2, "ag": 2, "real": true },
+  { "home": "SWE", "away": "TUN", "hg": 5, "ag": 1, "real": true },
+  { "home": "BEL", "away": "EGY", "hg": 1, "ag": 1, "real": true },
+  { "home": "IRN", "away": "NZL", "hg": 2, "ag": 2, "real": true },
+  { "home": "ESP", "away": "CPV", "hg": 0, "ag": 0, "real": true },
+  { "home": "KSA", "away": "URU", "hg": 1, "ag": 1, "real": true }
+]

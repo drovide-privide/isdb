@@ -1,0 +1,74 @@
+{
+  "A": [
+    { "code": "MEX", "name": "Mexico",       "c1": "#006847", "c2": "#ce1126" },
+    { "code": "RSA", "name": "South Africa", "c1": "#007a4d", "c2": "#ffb612" },
+    { "code": "KOR", "name": "South Korea",  "c1": "#0047a0", "c2": "#cd2e3a" },
+    { "code": "CZE", "name": "Czechia",      "c1": "#11457e", "c2": "#d7141a" }
+  ],
+  "B": [
+    { "code": "CAN", "name": "Canada",       "c1": "#ff0000", "c2": "#ffffff" },
+    { "code": "BIH", "name": "Bosnia & H.",  "c1": "#002395", "c2": "#ffec00" },
+    { "code": "QAT", "name": "Qatar",        "c1": "#8a1538", "c2": "#ffffff" },
+    { "code": "SUI", "name": "Switzerland",  "c1": "#d52b1e", "c2": "#ffffff" }
+  ],
+  "C": [
+    { "code": "BRA", "name": "Brazil",       "c1": "#009c3b", "c2": "#ffdf00" },
+    { "code": "MAR", "name": "Morocco",      "c1": "#c1272d", "c2": "#006233" },
+    { "code": "HAI", "name": "Haiti",        "c1": "#00209f", "c2": "#d21034" },
+    { "code": "SCO", "name": "Scotland",     "c1": "#0065bf", "c2": "#ffffff" }
+  ],
+  "D": [
+    { "code": "USA", "name": "United States","c1": "#3c3b6e", "c2": "#b22234" },
+    { "code": "PAR", "name": "Paraguay",     "c1": "#d52b1e", "c2": "#0038a8" },
+    { "code": "AUS", "name": "Australia",    "c1": "#00843d", "c2": "#ffcd00" },
+    { "code": "TUR", "name": "Turkey",      "c1": "#e30a17", "c2": "#ffffff" }
+  ],
+  "E": [
+    { "code": "GER", "name": "Germany",      "c1": "#1a1a1a", "c2": "#dd0000" },
+    { "code": "CUW", "name": "Curaçao",      "c1": "#002b7f", "c2": "#f9d616" },
+    { "code": "CIV", "name": "Ivory Coast",  "c1": "#ff8200", "c2": "#009e60" },
+    { "code": "ECU", "name": "Ecuador",      "c1": "#ffd100", "c2": "#0072ce" }
+  ],
+  "F": [
+    { "code": "NED", "name": "Netherlands",  "c1": "#ff6a13", "c2": "#21468b" },
+    { "code": "JPN", "name": "Japan",        "c1": "#bc002d", "c2": "#ffffff" },
+    { "code": "SWE", "name": "Sweden",       "c1": "#006aa7", "c2": "#fecc02" },
+    { "code": "TUN", "name": "Tunisia",      "c1": "#e70013", "c2": "#ffffff" }
+  ],
+  "G": [
+    { "code": "BEL", "name": "Belgium",      "c1": "#e30613", "c2": "#ffd90c" },
+    { "code": "EGY", "name": "Egypt",        "c1": "#ce1126", "c2": "#1a1a1a" },
+    { "code": "IRN", "name": "Iran",         "c1": "#239f40", "c2": "#da0000" },
+    { "code": "NZL", "name": "New Zealand",  "c1": "#1a1a1a", "c2": "#ffffff" }
+  ],
+  "H": [
+    { "code": "ESP", "name": "Spain",        "c1": "#aa151b", "c2": "#f1bf00" },
+    { "code": "CPV", "name": "Cape Verde",   "c1": "#003893", "c2": "#cf2027" },
+    { "code": "KSA", "name": "Saudi Arabia", "c1": "#006c35", "c2": "#ffffff" },
+    { "code": "URU", "name": "Uruguay",      "c1": "#4f9dde", "c2": "#ffffff" }
+  ],
+  "I": [
+    { "code": "FRA", "name": "France",       "c1": "#0055a4", "c2": "#ef4135" },
+    { "code": "SEN", "name": "Senegal",      "c1": "#00853f", "c2": "#fdef42" },
+    { "code": "IRQ", "name": "Iraq",         "c1": "#007a3d", "c2": "#ce1126" },
+    { "code": "NOR", "name": "Norway",       "c1": "#ba0c2f", "c2": "#00205b" }
+  ],
+  "J": [
+    { "code": "ARG", "name": "Argentina",    "c1": "#75aadb", "c2": "#ffffff" },
+    { "code": "ALG", "name": "Algeria",      "c1": "#006233", "c2": "#d21034" },
+    { "code": "AUT", "name": "Austria",      "c1": "#ed2939", "c2": "#ffffff" },
+    { "code": "JOR", "name": "Jordan",       "c1": "#007a3d", "c2": "#ce1126" }
+  ],
+  "K": [
+    { "code": "POR", "name": "Portugal",     "c1": "#006600", "c2": "#ff0000" },
+    { "code": "COD", "name": "DR Congo",     "c1": "#007fff", "c2": "#f7d618" },
+    { "code": "UZB", "name": "Uzbekistan",   "c1": "#1eb53a", "c2": "#0099b5" },
+    { "code": "COL", "name": "Colombia",     "c1": "#fcd116", "c2": "#003893" }
+  ],
+  "L": [
+    { "code": "ENG", "name": "England",      "c1": "#dfe3ea", "c2": "#ce1124" },
+    { "code": "CRO", "name": "Croatia",      "c1": "#ff0000", "c2": "#ffffff" },
+    { "code": "GHA", "name": "Ghana",        "c1": "#006b3f", "c2": "#fcd116" },
+    { "code": "PAN", "name": "Panama",       "c1": "#d21034", "c2": "#005293" }
+  ]
+}
