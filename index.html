@@ -431,7 +431,7 @@ class Component extends DCLogic {
         const iconH = compact ? 16 : 18;
         const tint = (m.hasScore && m.rating !== null) ? m.bg.replace('rgb(','rgba(').replace(')',',0.30)') : 'rgba(255,255,255,0.08)';
         const flagBase = {width:iconW+'px', height:iconH+'px', borderRadius:'4px', objectFit:'cover', flexShrink:0, transition:'opacity 0.2s ease, transform 0.2s ease', boxShadow:'inset 0 0 0 '+iconW+'px '+tint+', 0 1px 3px rgba(0,0,0,0.45)', transform:'scale(0.7)'};
-        const flagIconStyle = hasTeams ? {...flagBase, opacity:0} : {display:'none'};
+        const flagIconStyle = hasTeams ? {...flagBase, opacity:(m.isReal && m.rating !== null && sort==='rating') ? 1 : 0, transform:(m.isReal && m.rating !== null && sort==='rating') ? 'scale(1)' : 'scale(0.7)'} : {display:'none'};
         const bg = (m.hasScore && m.rating !== null) ? m.bg : (m.hasScore ? '#1a1f2a' : 'transparent');
         const fg = (m.hasScore && m.rating !== null) ? m.fg : (m.hasScore ? '#5b6473' : '#5b6473');
         const selShadow = seld ? `, 0 0 0 2px #0e121a, 0 0 0 4px ${accent}` : '';
