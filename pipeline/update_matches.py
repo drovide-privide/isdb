@@ -7,7 +7,7 @@ Pipeline that:
 3. Finds the latest wc2026_<timestamp>.json from data/imdb/
 4. Writes data/frontend/matches_wc2026.json as a plain JSON array,
    keeping all fields the HTML frontend expects:
-     home, away, hg, ag, real, imdb_score, oneline_comment
+     home, away, hg, ag, imdb_score, oneline_comment
    plus enriched fields:
      match_id, date, time_et, stage, group, stadium, city, country_played
 
@@ -232,13 +232,11 @@ def build_matches(
         pair_key = frozenset([h, a])
         date     = m.get("date", "")
 
-        # --- scores (hg / ag / real) ---
+        # --- scores (hg / ag) ---
         if pair_key in scores:
             hg, ag = scores[pair_key]
-            real = True
         else:
             hg, ag = None, None
-            real = False
 
         # --- imdb_score ---
         if pair_key in by_pair:
@@ -255,12 +253,10 @@ def build_matches(
             imdb_score = None
 
         out.append({
-            # fields the HTML frontend needs
             "home":           h,
             "away":           a,
             "hg":             hg,
             "ag":             ag,
-            "real":           real,
             # enriched fields
             "match_id":       m.get("match_id"),
             "date":           date,
@@ -316,9 +312,9 @@ def update(
 
     # 6. Build output
     enriched, n_pair, n_date = build_matches(schedule, scores, by_pair, by_date, existing_comments)
-    real_count = sum(1 for m in enriched if m["real"])
+    real_count = sum(1 for m in enriched if m["hg"] is not None)
     print(f"[✓] Resolved matches : {len(enriched)}")
-    print(f"[✓] With scores      : {real_count}  (real=True)")
+    print(f"[✓] With scores      : {real_count}")
     print(f"[✓] IMDb scores found: {n_pair + n_date}  ({n_pair} by team pair, {n_date} by date)")
 
     if dry_run:

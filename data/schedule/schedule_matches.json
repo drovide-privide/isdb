@@ -13,8 +13,7 @@
       "city": "Mexico City",
       "country_played": "Mexico",
       "home": "MEX",
-      "away": "RSA",
-      "played": true
+      "away": "RSA"
     },
     {
       "match_id": 2,
@@ -26,8 +25,7 @@
       "city": "Zapopan",
       "country_played": "Mexico",
       "home": "KOR",
-      "away": "CZE",
-      "played": true
+      "away": "CZE"
     },
     {
       "match_id": 3,
@@ -39,8 +37,7 @@
       "city": "Toronto",
       "country_played": "Canada",
       "home": "CAN",
-      "away": "BIH",
-      "played": true
+      "away": "BIH"
     },
     {
       "match_id": 4,
@@ -52,8 +49,7 @@
       "city": "Inglewood",
       "country_played": "USA",
       "home": "USA",
-      "away": "PAR",
-      "played": true
+      "away": "PAR"
     },
     {
       "match_id": 5,
@@ -65,8 +61,7 @@
       "city": "Santa Clara",
       "country_played": "USA",
       "home": "QAT",
-      "away": "SUI",
-      "played": true
+      "away": "SUI"
     },
     {
       "match_id": 6,
@@ -78,8 +73,7 @@
       "city": "East Rutherford",
       "country_played": "USA",
       "home": "BRA",
-      "away": "MAR",
-      "played": true
+      "away": "MAR"
     },
     {
       "match_id": 7,
@@ -91,8 +85,7 @@
       "city": "Foxborough",
       "country_played": "USA",
       "home": "HAI",
-      "away": "SCO",
-      "played": true
+      "away": "SCO"
     },
     {
       "match_id": 8,
@@ -104,8 +97,7 @@
       "city": "Vancouver",
       "country_played": "Canada",
       "home": "AUS",
-      "away": "TUR",
-      "played": true
+      "away": "TUR"
     },
     {
       "match_id": 9,
@@ -117,8 +109,7 @@
       "city": "Houston",
       "country_played": "USA",
       "home": "GER",
-      "away": "CUW",
-      "played": true
+      "away": "CUW"
     },
     {
       "match_id": 10,
@@ -130,8 +121,7 @@
       "city": "Arlington",
       "country_played": "USA",
       "home": "NED",
-      "away": "JPN",
-      "played": true
+      "away": "JPN"
     },
     {
       "match_id": 11,
@@ -143,8 +133,7 @@
       "city": "Philadelphia",
       "country_played": "USA",
       "home": "CIV",
-      "away": "ECU",
-      "played": true
+      "away": "ECU"
     },
     {
       "match_id": 12,
@@ -156,8 +145,7 @@
       "city": "Monterrey",
       "country_played": "Mexico",
       "home": "SWE",
-      "away": "TUN",
-      "played": true
+      "away": "TUN"
     },
     {
       "match_id": 13,
@@ -169,8 +157,7 @@
       "city": "Atlanta",
       "country_played": "USA",
       "home": "ESP",
-      "away": "CPV",
-      "played": true
+      "away": "CPV"
     },
     {
       "match_id": 14,
@@ -182,8 +169,7 @@
       "city": "Seattle",
       "country_played": "USA",
       "home": "BEL",
-      "away": "EGY",
-      "played": true
+      "away": "EGY"
     },
     {
       "match_id": 15,
@@ -195,8 +181,7 @@
       "city": "Miami Gardens",
       "country_played": "USA",
       "home": "KSA",
-      "away": "URU",
-      "played": true
+      "away": "URU"
     },
     {
       "match_id": 16,
@@ -208,8 +193,7 @@
       "city": "Inglewood",
       "country_played": "USA",
       "home": "IRN",
-      "away": "NZL",
-      "played": true
+      "away": "NZL"
     },
     {
       "match_id": 17,
@@ -221,8 +205,7 @@
       "city": "East Rutherford",
       "country_played": "USA",
       "home": "FRA",
-      "away": "SEN",
-      "played": true
+      "away": "SEN"
     },
     {
       "match_id": 18,
@@ -234,8 +217,7 @@
       "city": "Foxborough",
       "country_played": "USA",
       "home": "IRQ",
-      "away": "NOR",
-      "played": true
+      "away": "NOR"
     },
     {
       "match_id": 19,
@@ -247,8 +229,7 @@
       "city": "Kansas City",
       "country_played": "USA",
       "home": "ARG",
-      "away": "ALG",
-      "played": true
+      "away": "ALG"
     },
     {
       "match_id": 20,
@@ -260,8 +241,7 @@
       "city": "Santa Clara",
       "country_played": "USA",
       "home": "AUT",
-      "away": "JOR",
-      "played": true
+      "away": "JOR"
     },
     {
       "match_id": 21,
@@ -273,8 +253,7 @@
       "city": "Houston",
       "country_played": "USA",
       "home": "POR",
-      "away": "COD",
-      "played": true
+      "away": "COD"
     },
     {
       "match_id": 22,
@@ -286,8 +265,7 @@
       "city": "Arlington",
       "country_played": "USA",
       "home": "ENG",
-      "away": "CRO",
-      "played": true
+      "away": "CRO"
     },
     {
       "match_id": 23,
@@ -299,8 +277,7 @@
       "city": "Toronto",
       "country_played": "Canada",
       "home": "GHA",
-      "away": "PAN",
-      "played": true
+      "away": "PAN"
     },
     {
       "match_id": 24,
@@ -312,8 +289,7 @@
       "city": "Mexico City",
       "country_played": "Mexico",
       "home": "UZB",
-      "away": "COL",
-      "played": true
+      "away": "COL"
     },
     {
       "match_id": 25,
@@ -325,8 +301,7 @@
       "city": "Atlanta",
       "country_played": "USA",
       "home": "CZE",
-      "away": "RSA",
-      "played": false
+      "away": "RSA"
     },
     {
       "match_id": 26,
@@ -338,8 +313,7 @@
       "city": "Inglewood",
       "country_played": "USA",
       "home": "SUI",
-      "away": "BIH",
-      "played": false
+      "away": "BIH"
     },
     {
       "match_id": 27,
@@ -351,8 +325,7 @@
       "city": "Vancouver",
       "country_played": "Canada",
       "home": "CAN",
-      "away": "QAT",
-      "played": false
+      "away": "QAT"
     },
     {
       "match_id": 28,
@@ -364,8 +337,7 @@
       "city": "Zapopan",
       "country_played": "Mexico",
       "home": "MEX",
-      "away": "KOR",
-      "played": false
+      "away": "KOR"
     },
     {
       "match_id": 29,
@@ -377,8 +349,7 @@
       "city": "Seattle",
       "country_played": "USA",
       "home": "USA",
-      "away": "AUS",
-      "played": false
+      "away": "AUS"
     },
     {
       "match_id": 30,
@@ -390,8 +361,7 @@
       "city": "Foxborough",
       "country_played": "USA",
       "home": "SCO",
-      "away": "MAR",
-      "played": false
+      "away": "MAR"
     },
     {
       "match_id": 31,
@@ -403,8 +373,7 @@
       "city": "Philadelphia",
       "country_played": "USA",
       "home": "BRA",
-      "away": "HAI",
-      "played": false
+      "away": "HAI"
     },
     {
       "match_id": 32,
@@ -416,8 +385,7 @@
       "city": "Santa Clara",
       "country_played": "USA",
       "home": "TUR",
-      "away": "PAR",
-      "played": false
+      "away": "PAR"
     },
     {
       "match_id": 33,
@@ -429,8 +397,7 @@
       "city": "Houston",
       "country_played": "USA",
       "home": "NED",
-      "away": "SWE",
-      "played": false
+      "away": "SWE"
     },
     {
       "match_id": 34,
@@ -442,8 +409,7 @@
       "city": "Toronto",
       "country_played": "Canada",
       "home": "GER",
-      "away": "CIV",
-      "played": false
+      "away": "CIV"
     },
     {
       "match_id": 35,
@@ -455,8 +421,7 @@
       "city": "Kansas City",
       "country_played": "USA",
       "home": "ECU",
-      "away": "CUW",
-      "played": false
+      "away": "CUW"
     },
     {
       "match_id": 36,
@@ -468,8 +433,7 @@
       "city": "Monterrey",
       "country_played": "Mexico",
       "home": "TUN",
-      "away": "JPN",
-      "played": false
+      "away": "JPN"
     },
     {
       "match_id": 37,
@@ -481,8 +445,7 @@
       "city": "Atlanta",
       "country_played": "USA",
       "home": "ESP",
-      "away": "KSA",
-      "played": false
+      "away": "KSA"
     },
     {
       "match_id": 38,
@@ -494,8 +457,7 @@
       "city": "Inglewood",
       "country_played": "USA",
       "home": "BEL",
-      "away": "IRN",
-      "played": false
+      "away": "IRN"
     },
     {
       "match_id": 39,
@@ -507,8 +469,7 @@
       "city": "Miami Gardens",
       "country_played": "USA",
       "home": "URU",
-      "away": "CPV",
-      "played": false
+      "away": "CPV"
     },
     {
       "match_id": 40,
@@ -520,8 +481,7 @@
       "city": "Vancouver",
       "country_played": "Canada",
       "home": "NZL",
-      "away": "EGY",
-      "played": false
+      "away": "EGY"
     },
     {
       "match_id": 41,
@@ -533,8 +493,7 @@
       "city": "Arlington",
       "country_played": "USA",
       "home": "ARG",
-      "away": "AUT",
-      "played": false
+      "away": "AUT"
     },
     {
       "match_id": 42,
@@ -546,8 +505,7 @@
       "city": "Philadelphia",
       "country_played": "USA",
       "home": "FRA",
-      "away": "IRQ",
-      "played": false
+      "away": "IRQ"
     },
     {
       "match_id": 43,
@@ -559,8 +517,7 @@
       "city": "East Rutherford",
       "country_played": "USA",
       "home": "NOR",
-      "away": "SEN",
-      "played": false
+      "away": "SEN"
     },
     {
       "match_id": 44,
@@ -572,8 +529,7 @@
       "city": "Santa Clara",
       "country_played": "USA",
       "home": "JOR",
-      "away": "ALG",
-      "played": false
+      "away": "ALG"
     },
     {
       "match_id": 45,
@@ -585,8 +541,7 @@
       "city": "Houston",
       "country_played": "USA",
       "home": "POR",
-      "away": "UZB",
-      "played": false
+      "away": "UZB"
     },
     {
       "match_id": 46,
@@ -598,8 +553,7 @@
       "city": "Foxborough",
       "country_played": "USA",
       "home": "ENG",
-      "away": "GHA",
-      "played": false
+      "away": "GHA"
     },
     {
       "match_id": 47,
@@ -611,8 +565,7 @@
       "city": "Toronto",
       "country_played": "Canada",
       "home": "PAN",
-      "away": "CRO",
-      "played": false
+      "away": "CRO"
     },
     {
       "match_id": 48,
@@ -624,8 +577,7 @@
       "city": "Zapopan",
       "country_played": "Mexico",
       "home": "COL",
-      "away": "COD",
-      "played": false
+      "away": "COD"
     },
     {
       "match_id": 49,
@@ -637,8 +589,7 @@
       "city": "Vancouver",
       "country_played": "Canada",
       "home": "SUI",
-      "away": "CAN",
-      "played": false
+      "away": "CAN"
     },
     {
       "match_id": 50,
@@ -650,8 +601,7 @@
       "city": "Seattle",
       "country_played": "USA",
       "home": "BIH",
-      "away": "QAT",
-      "played": false
+      "away": "QAT"
     },
     {
       "match_id": 51,
@@ -663,8 +613,7 @@
       "city": "Miami Gardens",
       "country_played": "USA",
       "home": "SCO",
-      "away": "BRA",
-      "played": false
+      "away": "BRA"
     },
     {
       "match_id": 52,
@@ -676,8 +625,7 @@
       "city": "Atlanta",
       "country_played": "USA",
       "home": "MAR",
-      "away": "HAI",
-      "played": false
+      "away": "HAI"
     },
     {
       "match_id": 53,
@@ -689,8 +637,7 @@
       "city": "Mexico City",
       "country_played": "Mexico",
       "home": "CZE",
-      "away": "MEX",
-      "played": false
+      "away": "MEX"
     },
     {
       "match_id": 54,
@@ -702,8 +649,7 @@
       "city": "Monterrey",
       "country_played": "Mexico",
       "home": "RSA",
-      "away": "KOR",
-      "played": false
+      "away": "KOR"
     },
     {
       "match_id": 55,
@@ -715,8 +661,7 @@
       "city": "Philadelphia",
       "country_played": "USA",
       "home": "CUW",
-      "away": "CIV",
-      "played": false
+      "away": "CIV"
     },
     {
       "match_id": 56,
@@ -728,8 +673,7 @@
       "city": "East Rutherford",
       "country_played": "USA",
       "home": "ECU",
-      "away": "GER",
-      "played": false
+      "away": "GER"
     },
     {
       "match_id": 57,
@@ -741,8 +685,7 @@
       "city": "Arlington",
       "country_played": "USA",
       "home": "JPN",
-      "away": "SWE",
-      "played": false
+      "away": "SWE"
     },
     {
       "match_id": 58,
@@ -754,8 +697,7 @@
       "city": "Kansas City",
       "country_played": "USA",
       "home": "TUN",
-      "away": "NED",
-      "played": false
+      "away": "NED"
     },
     {
       "match_id": 59,
@@ -767,8 +709,7 @@
       "city": "Inglewood",
       "country_played": "USA",
       "home": "TUR",
-      "away": "USA",
-      "played": false
+      "away": "USA"
     },
     {
       "match_id": 60,
@@ -780,8 +721,7 @@
       "city": "Santa Clara",
       "country_played": "USA",
       "home": "PAR",
-      "away": "AUS",
-      "played": false
+      "away": "AUS"
     },
     {
       "match_id": 61,
@@ -793,8 +733,7 @@
       "city": "Foxborough",
       "country_played": "USA",
       "home": "NOR",
-      "away": "FRA",
-      "played": false
+      "away": "FRA"
     },
     {
       "match_id": 62,
@@ -806,8 +745,7 @@
       "city": "Toronto",
       "country_played": "Canada",
       "home": "SEN",
-      "away": "IRQ",
-      "played": false
+      "away": "IRQ"
     },
     {
       "match_id": 63,
@@ -819,8 +757,7 @@
       "city": "Houston",
       "country_played": "USA",
       "home": "CPV",
-      "away": "KSA",
-      "played": false
+      "away": "KSA"
     },
     {
       "match_id": 64,
@@ -832,8 +769,7 @@
       "city": "Zapopan",
       "country_played": "Mexico",
       "home": "URU",
-      "away": "ESP",
-      "played": false
+      "away": "ESP"
     },
     {
       "match_id": 65,
@@ -845,8 +781,7 @@
       "city": "Seattle",
       "country_played": "USA",
       "home": "EGY",
-      "away": "IRN",
-      "played": false
+      "away": "IRN"
     },
     {
       "match_id": 66,
@@ -858,8 +793,7 @@
       "city": "Vancouver",
       "country_played": "Canada",
       "home": "NZL",
-      "away": "BEL",
-      "played": false
+      "away": "BEL"
     },
     {
       "match_id": 67,
@@ -871,8 +805,7 @@
       "city": "East Rutherford",
       "country_played": "USA",
       "home": "PAN",
-      "away": "ENG",
-      "played": false
+      "away": "ENG"
     },
     {
       "match_id": 68,
@@ -884,8 +817,7 @@
       "city": "Philadelphia",
       "country_played": "USA",
       "home": "CRO",
-      "away": "GHA",
-      "played": false
+      "away": "GHA"
     },
     {
       "match_id": 69,
@@ -897,8 +829,7 @@
       "city": "Miami Gardens",
       "country_played": "USA",
       "home": "COL",
-      "away": "POR",
-      "played": false
+      "away": "POR"
     },
     {
       "match_id": 70,
@@ -910,8 +841,7 @@
       "city": "Atlanta",
       "country_played": "USA",
       "home": "COD",
-      "away": "UZB",
-      "played": false
+      "away": "UZB"
     },
     {
       "match_id": 71,
@@ -923,8 +853,7 @@
       "city": "Kansas City",
       "country_played": "USA",
       "home": "ALG",
-      "away": "AUT",
-      "played": false
+      "away": "AUT"
     },
     {
       "match_id": 72,
@@ -936,8 +865,7 @@
       "city": "Arlington",
       "country_played": "USA",
       "home": "JOR",
-      "away": "ARG",
-      "played": false
+      "away": "ARG"
     },
     {
       "match_id": 73,
@@ -949,8 +877,7 @@
       "city": "Inglewood",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 74,
@@ -962,8 +889,7 @@
       "city": "Houston",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 75,
@@ -975,8 +901,7 @@
       "city": "Foxborough",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 76,
@@ -988,8 +913,7 @@
       "city": "Monterrey",
       "country_played": "Mexico",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 77,
@@ -1001,8 +925,7 @@
       "city": "Arlington",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 78,
@@ -1014,8 +937,7 @@
       "city": "East Rutherford",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 79,
@@ -1027,8 +949,7 @@
       "city": "Mexico City",
       "country_played": "Mexico",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 80,
@@ -1040,8 +961,7 @@
       "city": "Atlanta",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 81,
@@ -1053,8 +973,7 @@
       "city": "Seattle",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 82,
@@ -1066,8 +985,7 @@
       "city": "Santa Clara",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 83,
@@ -1079,8 +997,7 @@
       "city": "Inglewood",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 84,
@@ -1092,8 +1009,7 @@
       "city": "Toronto",
       "country_played": "Canada",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 85,
@@ -1105,8 +1021,7 @@
       "city": "Vancouver",
       "country_played": "Canada",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 86,
@@ -1118,8 +1033,7 @@
       "city": "Arlington",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 87,
@@ -1131,8 +1045,7 @@
       "city": "Miami Gardens",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 88,
@@ -1144,8 +1057,7 @@
       "city": "Kansas City",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 89,
@@ -1157,8 +1069,7 @@
       "city": "Houston",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 90,
@@ -1170,8 +1081,7 @@
       "city": "Philadelphia",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 91,
@@ -1183,8 +1093,7 @@
       "city": "East Rutherford",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 92,
@@ -1196,8 +1105,7 @@
       "city": "Mexico City",
       "country_played": "Mexico",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 93,
@@ -1209,8 +1117,7 @@
       "city": "Arlington",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 94,
@@ -1222,8 +1129,7 @@
       "city": "Seattle",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 95,
@@ -1235,8 +1141,7 @@
       "city": "Atlanta",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 96,
@@ -1248,8 +1153,7 @@
       "city": "Vancouver",
       "country_played": "Canada",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 97,
@@ -1261,8 +1165,7 @@
       "city": "Foxborough",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 98,
@@ -1274,8 +1177,7 @@
       "city": "Inglewood",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 99,
@@ -1287,8 +1189,7 @@
       "city": "Miami Gardens",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 100,
@@ -1300,8 +1201,7 @@
       "city": "Kansas City",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 101,
@@ -1313,8 +1213,7 @@
       "city": "Arlington",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 102,
@@ -1326,8 +1225,7 @@
       "city": "Atlanta",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 103,
@@ -1339,8 +1237,7 @@
       "city": "Miami Gardens",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     },
     {
       "match_id": 104,
@@ -1352,8 +1249,7 @@
       "city": "East Rutherford",
       "country_played": "USA",
       "home": "",
-      "away": "",
-      "played": false
+      "away": ""
     }
   ]
 }
