@@ -1,5 +1,11 @@
 ISDb running setups and stuffs to know (note for myself too actually)
 
+# Try!
+
+https://isdb-euy.vercel.app
+
+_______
+
 # Pipeline
 
 Scripts for fetching and updating WC2026 data.
