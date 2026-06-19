@@ -101,5 +101,5 @@ python3 update_matches.py --dry-run
 ### However,
 you can always run all them together (wont hurt):
 ```bash 
-python imdb_rating.py tt32915471 --output ../data/imdb/wc2026.json && python update_schedule.py && python update_matches.py
+python update_imdb.py tt32915471 --output ../data/imdb/wc2026.json && python update_schedule.py && python update_matches.py
 ```
