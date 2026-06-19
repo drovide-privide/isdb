@@ -1,0 +1,150 @@
+{
+  "last_updated": "2026-06-18T16:52:11Z",
+  "source_imdb_file": "wc2026_20260616_190721.json",
+  "matches": [
+    {
+      "home": "MEX",
+      "away": "RSA",
+      "hg": 2,
+      "ag": 0,
+      "real": true,
+      "imdb_score": 6.1,
+      "oneline_comment": ""
+    },
+    {
+      "home": "KOR",
+      "away": "CZE",
+      "hg": 2,
+      "ag": 1,
+      "real": true,
+      "imdb_score": 7.3,
+      "oneline_comment": ""
+    },
+    {
+      "home": "CAN",
+      "away": "BIH",
+      "hg": 1,
+      "ag": 1,
+      "real": true,
+      "imdb_score": 5.7,
+      "oneline_comment": ""
+    },
+    {
+      "home": "QAT",
+      "away": "SUI",
+      "hg": 1,
+      "ag": 1,
+      "real": true,
+      "imdb_score": 5.3,
+      "oneline_comment": ""
+    },
+    {
+      "home": "BRA",
+      "away": "MAR",
+      "hg": 1,
+      "ag": 1,
+      "real": true,
+      "imdb_score": 7.2,
+      "oneline_comment": ""
+    },
+    {
+      "home": "HAI",
+      "away": "SCO",
+      "hg": 0,
+      "ag": 1,
+      "real": true,
+      "imdb_score": 5.6,
+      "oneline_comment": ""
+    },
+    {
+      "home": "USA",
+      "away": "PAR",
+      "hg": 4,
+      "ag": 1,
+      "real": true,
+      "imdb_score": 7.4,
+      "oneline_comment": ""
+    },
+    {
+      "home": "AUS",
+      "away": "TUR",
+      "hg": 2,
+      "ag": 0,
+      "real": true,
+      "imdb_score": 6.6,
+      "oneline_comment": ""
+    },
+    {
+      "home": "GER",
+      "away": "CUW",
+      "hg": 7,
+      "ag": 1,
+      "real": true,
+      "imdb_score": null,
+      "oneline_comment": ""
+    },
+    {
+      "home": "CIV",
+      "away": "ECU",
+      "hg": 1,
+      "ag": 0,
+      "real": true,
+      "imdb_score": 6.6,
+      "oneline_comment": ""
+    },
+    {
+      "home": "NED",
+      "away": "JPN",
+      "hg": 2,
+      "ag": 2,
+      "real": true,
+      "imdb_score": 8.1,
+      "oneline_comment": ""
+    },
+    {
+      "home": "SWE",
+      "away": "TUN",
+      "hg": 5,
+      "ag": 1,
+      "real": true,
+      "imdb_score": 6.7,
+      "oneline_comment": ""
+    },
+    {
+      "home": "BEL",
+      "away": "EGY",
+      "hg": 1,
+      "ag": 1,
+      "real": true,
+      "imdb_score": 6.5,
+      "oneline_comment": ""
+    },
+    {
+      "home": "IRN",
+      "away": "NZL",
+      "hg": 2,
+      "ag": 2,
+      "real": true,
+      "imdb_score": 6.8,
+      "oneline_comment": ""
+    },
+    {
+      "home": "ESP",
+      "away": "CPV",
+      "hg": 0,
+      "ag": 0,
+      "real": true,
+      "imdb_score": 6.2,
+      "oneline_comment": ""
+    },
+    {
+      "home": "KSA",
+      "away": "URU",
+      "hg": 1,
+      "ag": 1,
+      "real": true,
+      "imdb_score": 7.5,
+      "oneline_comment": ""
+    }
+  ]
+}
