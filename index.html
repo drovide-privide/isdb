@@ -28,56 +28,46 @@
   <!-- TOP BAR -->
   <div style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:14px 28px;background:rgba(11,13,18,0.82);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07)">
     <div style="display:flex;align-items:center;gap:11px">
-      <div style="background:{{ accent }};color:#0b0e14;font-weight:800;font-size:17px;letter-spacing:-0.5px;padding:5px 9px;border-radius:8px;line-height:1">ISEDb</div>
+      <div style="background:{{ accent }};color:#0b0e14;font-weight:800;font-size:17px;letter-spacing:-0.5px;padding:5px 9px;border-radius:8px;line-height:1">ISDb</div>
       <div style="display:flex;flex-direction:column;line-height:1.1">
         <span style="font-weight:700;font-size:14px;letter-spacing:0.2px">Internet Sporting Event Database</span>
-        <span style="font-family:'DM Mono',monospace;font-size:10.5px;color:#7d8696;letter-spacing:1px">WORLD CUP 2026 · MATCH RATINGS</span>
       </div>
     </div>
     <div style="flex:1"></div>
     <div style="display:flex;align-items:center;gap:8px;background:#13171f;border:1px solid rgba(255,255,255,0.08);border-radius:999px;padding:8px 14px;min-width:230px;color:#6b7280">
       <span style="font-size:13px">⌕</span>
-      <span style="font-size:13px;font-family:'DM Mono',monospace">Search matches, teams…</span>
+      <span style="font-size:13px;font-family:'Saira',sans-serif">Search matches, teams…</span>
     </div>
-    <div style="display:flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:11px;color:#aab2c0;border:1px solid rgba(255,255,255,0.08);border-radius:999px;padding:7px 12px">
+    <div style="display:flex;align-items:center;gap:7px;font-family:'Saira',sans-serif;font-size:11px;color:#aab2c0;border:1px solid rgba(255,255,255,0.08);border-radius:999px;padding:7px 12px">
       <span style="width:7px;height:7px;border-radius:50%;background:#ff4d8d;box-shadow:0 0 8px #ff4d8d"></span>
       LIVE
     </div>
   </div>
 
-  <div style="max-width:1180px;margin:0 auto;padding:0 28px">
+  <div style="max-width:1380px;margin:0 auto;padding:0 64px">
 
     <!-- HEADER -->
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;padding:36px 0 22px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:16px 0 14px">
       <div>
-        <div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;color:{{ accent }};margin-bottom:8px">MATCH EXCITINGNESS RATING</div>
-        <h1 style="margin:0;font-size:46px;font-weight:800;letter-spacing:-1.2px;line-height:0.98">Match Ratings</h1>
-        <p style="margin:12px 0 0;font-size:15.5px;color:#9aa3b2;max-width:500px;line-height:1.5">Every match of the 2026 World Cup, scored out of 10 and shaded from dire to classic. Ratings sourced from IMDb fan votes. Click any cell for the full match card.</p>
-      </div>
-      <!-- GRADIENT LEGEND -->
-      <div style="display:flex;flex-direction:column;gap:10px;background:#11151d;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:15px 18px;min-width:248px">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:#7d8696">IMDb FAN RATING</div>
-        <div style="height:12px;border-radius:6px;background:linear-gradient(90deg, rgb(194,57,43), rgb(230,126,34), rgb(241,196,15), rgb(120,193,70), rgb(30,158,87))"></div>
-        <div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10.5px;color:#9aa3b2">
-          <span>3 · Dire</span><span>6 · Watchable</span><span>9 · Classic</span>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700;800&display=swap" rel="stylesheet">
+        <div style="display:flex;align-items:center;gap:4px;margin-bottom:14px">
+          <div style="height:1px;width:32px;background:{{ accent }}"></div>
+          <span style="font-family:'Saira',sans-serif;font-size:12px;letter-spacing:2.5px;color:{{ accent }}">World Cup 2026</span>
         </div>
-        <div style="display:flex;align-items:center;gap:8px;margin-top:2px;font-size:11.5px;color:#7d8696">
-          <span style="width:7px;height:7px;border-radius:50%;background:#eef1f6;box-shadow:0 0 0 2px rgba(255,255,255,0.15)"></span>
-          dot = IMDb rated · – = rating pending
-        </div>
-      </div>
+        <h1 style="margin:0 0 16px;font-family:'Roboto Slab',Georgia,serif;font-size:40px;font-weight:800;letter-spacing:-0.5px;line-height:1;color:#eef1f6;border-bottom:2px solid rgba(255,255,255,0.12);padding-bottom:14px">Rating of the sporting event: <em style="color:{{ accent }};font-style:normal">World Cup 2026</em></h1>
     </div>
+  </div>
 
     <!-- CONTROLS -->
     <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:16px">
       <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:#7d8696">GROUP</span>
+        <span style="font-family:'Saira',sans-serif;font-size:11px;letter-spacing:1.5px;color:#7d8696">GROUP</span>
         <sc-for list="{{ groupPills }}" as="pill" hint-placeholder-count="13">
           <div style="{{ pill.style }}" style-hover="{{ pill.hover }}" onClick="{{ pill.onClick }}">{{ pill.label }}</div>
         </sc-for>
       </div>
       <div style="display:flex;align-items:center;gap:10px">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:#7d8696">SORT</span>
+        <span style=";font-size:11px;letter-spacing:1.5px;color:#7d8696">SORT</span>
         <sc-for list="{{ sortPills }}" as="pill" hint-placeholder-count="2">
           <div style="{{ pill.style }}" style-hover="{{ pill.hover }}" onClick="{{ pill.onClick }}">{{ pill.label }}</div>
         </sc-for>
@@ -87,17 +77,17 @@
     <!-- GRID PANEL -->
     <div style="background:#0e121a;border:1px solid rgba(255,255,255,0.07);border-radius:18px;padding:18px 20px 22px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
-        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#7d8696">{{ shownCount }} matches · avg {{ avgScore }} · {{ realCount }} results in</div>
-        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#7d8696">{{ sortNote }}</div>
+        <div style="font-family:'Saira',sans-serif;font-size:11px;color:#7d8696">{{ shownCount }} matches · avg {{ avgScore }} · {{ realCount }} results in</div>
+        <div style="font-family:'Saira',sans-serif;font-size:11px;color:#7d8696">{{ sortNote }}</div>
       </div>
       <div style="overflow-x:auto">
-        <div style="display:grid;grid-template-columns:44px repeat(8, minmax(52px, 1fr));gap:6px;min-width:780px;align-items:start">
+        <div style="display:grid;grid-template-columns:32px repeat(8, 1fr);gap:6px;align-items:start">
           <!-- corner -->
           <div></div>
           <sc-for list="{{ headers }}" as="h" hint-placeholder-count="8">
             <div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding-bottom:6px">
               <span style="font-weight:800;font-size:16px;letter-spacing:-0.5px;color:{{ h.color }}">{{ h.abbr }}</span>
-              <span style="font-family:'DM Mono',monospace;font-size:8.5px;color:#6b7280;letter-spacing:0.4px;text-align:center;white-space:nowrap">{{ h.name }}</span>
+              <span style="font-family:'Saira',sans-serif;font-size:8.5px;color:#6b7280;letter-spacing:0.4px;text-align:center;white-space:nowrap">{{ h.name }}</span>
             </div>
           </sc-for>
           <!-- rows -->
@@ -115,7 +105,20 @@
       </div>
     </div>
 
-    <div style="font-family:'DM Mono',monospace;font-size:11px;color:#5b6473;margin-top:14px;line-height:1.6">Ratings sourced from IMDb fan votes · – means rating not yet available · scores update automatically after each match</div>
+    <p style="margin:18px 0 7px;font-family:'Saira',sans-serif;font-size:13px;font-weight:400;color:#9aa3b2;line-height:1.6"><span style="color:#eef1f6;font-weight:500">Scoring method</span> <span style="color:#5b6473">(as of Jun 19)</span>: retrieving directly from IMDb, testing the front-end to early users.</p>
+    <p style="margin:0 0 14px;font-family:'Saira',sans-serif;font-size:13px;font-weight:400;color:#9aa3b2;line-height:1.6"><span style="color:#eef1f6;font-weight:500">Proposed</span>: using match events and statistics to predict the match excitingness score, on an IMDb scale of 1–10.</p>
+
+          <!-- GRADIENT LEGEND -->
+    <div style="display:flex;flex-direction:column;gap:10px;background:#11151d;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:15px 18px;min-width:248px">
+      <div style="font-family:'Saira',sans-serif;font-size:10px;letter-spacing:1.5px;color:#7d8696">Color legend</div>
+      <div style="height:12px;border-radius:6px;background:linear-gradient(90deg, rgb(194,57,43), rgb(230,126,34), rgb(241,196,15), rgb(120,193,70), rgb(30,158,87))"></div>
+      <div style="display:flex;justify-content:space-between;font-family:'Saira',sans-serif;font-size:10.5px;color:#9aa3b2">
+        <span>3 · Dire</span><span>6 · Watchable</span><span>9 · Classic</span>
+      </div>
+    </div>
+
+
+    <div style="font-family:'Saira',sans-serif;font-size:11px;color:#5b6473;margin-top:14px;line-height:1.6">Ratings sourced from IMDb fan votes · – means rating not yet available · scores update automatically after each match</div>
 
   </div>
 
@@ -129,11 +132,11 @@
         </div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
           <div style="display:flex;align-items:baseline;gap:5px">
-            <span style="font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:{{ hover.home.color }}">{{ hover.home.g }}</span>
+            <span style="font-family:'Saira',sans-serif;font-size:20px;font-weight:500;color:{{ hover.home.color }}">{{ hover.home.g }}</span>
             <span style="font-size:11px;color:#3d4455">–</span>
-            <span style="font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:{{ hover.away.color }}">{{ hover.away.g }}</span>
+            <span style="font-family:'Saira',sans-serif;font-size:20px;font-weight:500;color:{{ hover.away.color }}">{{ hover.away.g }}</span>
           </div>
-          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:{{ hover.ratingColor }}">{{ hover.rating }}</span>
+          <span style="font-family:'Saira',sans-serif;font-size:13px;font-weight:500;color:{{ hover.ratingColor }}">{{ hover.rating }}</span>
         </div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
           <img src="{{ hover.away.flag }}" style="width:32px;height:24px;border-radius:4px;object-fit:cover;box-shadow:0 2px 6px rgba(0,0,0,0.5)" />
@@ -149,17 +152,17 @@
     <div onClick="{{ closeDrawer }}" style="position:fixed;inset:0;z-index:40;background:rgba(6,8,12,0.55);animation:isdbFade .18s ease"></div>
     <div style="position:fixed;top:0;right:0;bottom:0;z-index:41;width:392px;max-width:92vw;background:#10141c;border-left:1px solid rgba(255,255,255,0.09);box-shadow:-24px 0 60px rgba(0,0,0,0.5);padding:24px 26px;overflow-y:auto;animation:isdbDrawer .22s cubic-bezier(.2,.7,.2,1)">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:#7d8696">{{ sel.stage }}</span>
+        <span style="font-family:'Saira',sans-serif;font-size:11px;letter-spacing:1.5px;color:#7d8696">{{ sel.stage }}</span>
         <div onClick="{{ closeDrawer }}" style="cursor:pointer;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#1a1f29;color:#aab2c0;font-size:16px" style-hover="{{ closeHover }}">✕</div>
       </div>
 
       <!-- rating hero -->
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px">
-        <div style="width:78px;height:78px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:{{ sel.bg }};color:{{ sel.fg }};font-family:'DM Mono',monospace;font-size:30px;font-weight:500">{{ sel.rating }}</div>
+        <div style="width:78px;height:78px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:{{ sel.bg }};color:{{ sel.fg }};font-family:'Saira',sans-serif;font-size:30px;font-weight:500">{{ sel.rating }}</div>
         <div>
           <div style="font-size:22px;font-weight:800;letter-spacing:-0.4px;color:{{ sel.bg }}">{{ sel.tier }}</div>
           <div style="font-size:13px;color:#9aa3b2;margin-top:3px">IMDb fan rating · {{ sel.votes }} votes</div>
-          <div style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.5px;color:{{ sel.statusColor }};background:{{ sel.statusBg }};border-radius:999px;padding:3px 9px">{{ sel.status }}</div>
+          <div style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-family:'Saira',sans-serif;font-size:10px;letter-spacing:0.5px;color:{{ sel.statusColor }};background:{{ sel.statusBg }};border-radius:999px;padding:3px 9px">{{ sel.status }}</div>
         </div>
       </div>
 
@@ -168,34 +171,34 @@
         <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0">
           <div style="display:flex;align-items:center;gap:12px">
             <img src="{{ sel.home.flag }}" style="width:30px;height:21px;border-radius:4px;object-fit:cover;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.14)" />
-            <div style="display:flex;flex-direction:column;line-height:1.15"><span style="font-weight:700;font-size:16px">{{ sel.home.name }}</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:#6b7280">{{ sel.home.sub }}</span></div>
+            <div style="display:flex;flex-direction:column;line-height:1.15"><span style="font-weight:700;font-size:16px">{{ sel.home.name }}</span><span style="font-family:'Saira',sans-serif;font-size:10px;color:#6b7280">{{ sel.home.sub }}</span></div>
           </div>
-          <span style="font-family:'DM Mono',monospace;font-size:26px;font-weight:500;color:{{ sel.home.scoreColor }}">{{ sel.home.g }}</span>
+          <span style="font-family:'Saira',sans-serif;font-size:26px;font-weight:500;color:{{ sel.home.scoreColor }}">{{ sel.home.g }}</span>
         </div>
         <div style="height:1px;background:rgba(255,255,255,0.06);margin:6px 0"></div>
         <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0">
           <div style="display:flex;align-items:center;gap:12px">
             <img src="{{ sel.away.flag }}" style="width:30px;height:21px;border-radius:4px;object-fit:cover;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.14)" />
-            <div style="display:flex;flex-direction:column;line-height:1.15"><span style="font-weight:700;font-size:16px">{{ sel.away.name }}</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:#6b7280">{{ sel.away.sub }}</span></div>
+            <div style="display:flex;flex-direction:column;line-height:1.15"><span style="font-weight:700;font-size:16px">{{ sel.away.name }}</span><span style="font-family:'Saira',sans-serif;font-size:10px;color:#6b7280">{{ sel.away.sub }}</span></div>
           </div>
-          <span style="font-family:'DM Mono',monospace;font-size:26px;font-weight:500;color:{{ sel.away.scoreColor }}">{{ sel.away.g }}</span>
+          <span style="font-family:'Saira',sans-serif;font-size:26px;font-weight:500;color:{{ sel.away.scoreColor }}">{{ sel.away.g }}</span>
         </div>
-        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#6b7280;text-align:right;margin-top:8px">{{ sel.resultNote }}</div>
+        <div style="font-family:'Saira',sans-serif;font-size:11px;color:#6b7280;text-align:right;margin-top:8px">{{ sel.resultNote }}</div>
       </div>
 
       <!-- verdict -->
       <div style="font-size:15px;line-height:1.5;color:#d4dae3;font-style:italic;border-left:2px solid {{ sel.bg }};padding-left:14px;margin-bottom:22px">"{{ sel.verdict }}"</div>
 
       <!-- stats -->
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:#7d8696;margin-bottom:12px">MATCH STATS</div>
+      <div style="font-family:'Saira',sans-serif;font-size:10px;letter-spacing:1.5px;color:#7d8696;margin-bottom:12px">MATCH STATS</div>
       <div style="display:flex;flex-direction:column;gap:14px">
         <div>
-          <div style="display:flex;justify-content:space-between;font-size:13px;color:#c4cbd6;margin-bottom:5px"><span>{{ sel.poss }}%</span><span style="color:#7d8696;font-family:'DM Mono',monospace;font-size:11px">POSSESSION</span><span>{{ sel.possA }}%</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:#c4cbd6;margin-bottom:5px"><span>{{ sel.poss }}%</span><span style="color:#7d8696;font-family:'Saira',sans-serif;font-size:11px">POSSESSION</span><span>{{ sel.possA }}%</span></div>
           <div style="display:flex;height:6px;border-radius:4px;overflow:hidden;background:#1a1f29"><div style="{{ sel.possBar }}"></div></div>
         </div>
         <div style="display:flex;gap:12px">
-          <div style="flex:1;background:#0b0e15;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-family:'DM Mono',monospace;font-size:18px">{{ sel.shotsLine }}</div><div style="font-size:11px;color:#7d8696;margin-top:2px">Shots</div></div>
-          <div style="flex:1;background:#0b0e15;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-family:'DM Mono',monospace;font-size:18px">{{ sel.xgLine }}</div><div style="font-size:11px;color:#7d8696;margin-top:2px">xG</div></div>
+          <div style="flex:1;background:#0b0e15;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-family:'Saira',sans-serif;font-size:18px">{{ sel.shotsLine }}</div><div style="font-size:11px;color:#7d8696;margin-top:2px">Shots</div></div>
+          <div style="flex:1;background:#0b0e15;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-family:'Saira',sans-serif;font-size:18px">{{ sel.xgLine }}</div><div style="font-size:11px;color:#7d8696;margin-top:2px">xG</div></div>
         </div>
       </div>
     </div>
@@ -467,7 +470,10 @@ class Component extends DCLogic {
 
     const gps=['All','A','B','C','D','E','F','G','H','I','J','K','L'];
     const pillHover={background:'#1f2532', color:'#dfe4ec'};
-    const groupPills=gps.map(g=>({label:g, style:this.pillStyle(g===grp, accent), hover: g===grp?undefined:pillHover, onClick:()=>this.setState({group:g, sel:null})}));
+    const groupPills=gps.map(g=>{
+      const s=this.pillStyle(g===grp, accent);
+      return {label:g, style: g==='All' ? {...s, padding:'6px 24px'} : s, hover: g===grp?undefined:pillHover, onClick:()=>this.setState({group:g, sel:null})};
+    });
     const sortPills=[['order','Schedule'],['rating','Rating']].map(p=>({label:p[1], style:this.pillStyle(p[0]===sort, accent), hover: p[0]===sort?undefined:pillHover, onClick:()=>this.setState({sort:p[0]})}));
 
     const shown=[].concat(...colLists);
@@ -543,3 +549,5 @@ class Component extends DCLogic {
 </script>
 </body>
 </html>
+
+
