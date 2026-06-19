@@ -27,13 +27,28 @@ from playwright.sync_api import sync_playwright
 # Browser helpers
 # ---------------------------------------------------------------------------
 
-def get_next_data(page, url: str) -> dict:
-    """Navigate to a URL and extract the __NEXT_DATA__ JSON blob."""
-    page.goto(url, wait_until="domcontentloaded", timeout=30000)
-    # Wait for the JSON script tag (it's hidden, so use state="attached")
-    page.wait_for_selector("script#__NEXT_DATA__", state="attached", timeout=15000)
-    raw = page.eval_on_selector("script#__NEXT_DATA__", "el => el.textContent")
-    return json.loads(raw)
+def get_next_data(page, url: str, retries: int = 3) -> dict:
+    """Navigate to a URL and extract the __NEXT_DATA__ JSON blob.
+    Retries if the JSON is truncated (IMDb sometimes serves a partial blob
+    before the page has fully hydrated).
+    """
+    for attempt in range(1, retries + 1):
+        page.goto(url, wait_until="domcontentloaded", timeout=30000)
+        page.wait_for_selector("script#__NEXT_DATA__", state="attached", timeout=15000)
+        # Extra wait on retries to let the page settle
+        if attempt > 1:
+            page.wait_for_timeout(2000 * attempt)
+        raw = page.eval_on_selector("script#__NEXT_DATA__", "el => el.textContent")
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError as exc:
+            if attempt == retries:
+                raise RuntimeError(
+                    f"__NEXT_DATA__ still malformed after {retries} attempts "
+                    f"({url}): {exc}"
+                ) from exc
+            print(f"    [warn] JSON truncated on attempt {attempt}, retrying...")
+            time.sleep(1)
 
 
 # ---------------------------------------------------------------------------

@@ -3,19 +3,17 @@ update_matches.py
 -----------------
 Pipeline that:
 1. Reads data/schedule/schedule_matches.json as the source of truth for matches
-2. Finds the latest wc2026_<timestamp>.json from data/imdb/
-3. Merges IMDb scores onto each match using two strategies:
-   - Group stage: match by team pair (frozenset of FIFA codes)
-   - Knockouts:   match by date (IMDb uses "Episode #4.x" with no team names)
-4. Preserves existing oneline_comment values if already filled
-5. Writes the result to data/frontend/matches_wc2026.json
+2. Fetches scores (hg/ag) from openfootball
+3. Finds the latest wc2026_<timestamp>.json from data/imdb/
+4. Writes data/frontend/matches_wc2026.json as a plain JSON array,
+   keeping all fields the HTML frontend expects:
+     home, away, hg, ag, real, imdb_score, oneline_comment
+   plus enriched fields:
+     match_id, date, time_et, stage, group, stadium, city, country_played
 
 Usage:
     python3 update_matches.py
     python3 update_matches.py --dry-run
-    python3 update_matches.py --schedule ../data/schedule/schedule_matches.json
-                              --matches  ../data/frontend/matches_wc2026.json
-                              --imdb-dir ../data/imdb/
 """
 
 import argparse
@@ -24,8 +22,14 @@ import json
 import os
 import re
 import shutil
+import requests
 from datetime import datetime, timezone
 
+
+OPENFOOTBALL_URL = (
+    "https://raw.githubusercontent.com/openfootball/"
+    "worldcup.json/master/2026/worldcup.json"
+)
 
 # ---------------------------------------------------------------------------
 # Team name → FIFA 3-letter code
@@ -93,12 +97,21 @@ COUNTRY_TO_CODE: dict[str, str] = {
 }
 
 
+def to_code(name: str) -> str | None:
+    key = name.lower().strip()
+    if key in COUNTRY_TO_CODE:
+        return COUNTRY_TO_CODE[key]
+    for country, c in COUNTRY_TO_CODE.items():
+        if country in key or key in country:
+            return c
+    return None
+
+
 def normalise(name: str) -> str:
     return re.sub(r"[^a-z0-9 ]", "", name.lower().strip())
 
 
 def title_to_codes(episode_title: str) -> list[str]:
-    """Parse 'Group A: Qatar vs. Ecuador' → ['QAT', 'ECU']"""
     body = episode_title.split(":", 1)[-1] if ":" in episode_title else episode_title
     parts = re.split(r"\s+vs\.?\s+|\s+versus\s+", body, flags=re.IGNORECASE)
     codes = []
@@ -133,47 +146,56 @@ def find_latest_imdb_file(directory: str, prefix: str = "wc2026_") -> str:
     pattern = os.path.join(directory, f"{prefix}*.json")
     candidates = glob.glob(pattern)
     if not candidates:
-        raise FileNotFoundError(
-            f"No files matching '{pattern}' found in '{directory}'"
-        )
+        raise FileNotFoundError(f"No files matching '{pattern}' found in '{directory}'")
     return max(candidates, key=parse_timestamp)
 
 
 # ---------------------------------------------------------------------------
-# Core logic
+# Scores from openfootball  →  {frozenset(home, away): (hg, ag)}
+# ---------------------------------------------------------------------------
+
+def fetch_scores() -> dict[frozenset, tuple[int, int]]:
+    print(f"  Fetching scores from openfootball...")
+    r = requests.get(OPENFOOTBALL_URL, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
+    r.raise_for_status()
+    scores = {}
+    for m in r.json().get("matches", []):
+        t1, t2 = m.get("team1", ""), m.get("team2", "")
+        score = m.get("score", {}).get("ft")
+        if not score or re.match(r'^[WL]\d+$', t1) or re.match(r'^[WL]\d+$', t2):
+            continue
+        h, a = to_code(t1), to_code(t2)
+        if h and a:
+            scores[frozenset([h, a])] = (score[0], score[1])
+    print(f"  Got {len(scores)} scores")
+    return scores
+
+
+# ---------------------------------------------------------------------------
+# IMDb lookups
 # ---------------------------------------------------------------------------
 
 def build_imdb_lookups(episodes: list[dict]) -> tuple[dict, dict]:
-    """
-    Returns two lookups:
-      by_pair : frozenset({codeA, codeB}) → rating
-                Used for group stage where titles are "Group A: Mexico vs. South Africa"
-      by_date : "YYYY-MM-DD" → [rating, rating, ...]
-                Used for knockouts where titles are just "Episode #4.1" etc.
-                Multiple matches can share a date so we keep an ordered list.
-    """
     by_pair: dict[frozenset, float | None] = {}
     by_date: dict[str, list[float | None]] = {}
-
     for ep in episodes:
         title  = ep.get("title", "")
         rating = ep.get("rating")
         y, mo, d = ep.get("year"), ep.get("month"), ep.get("day")
         date_str = f"{y}-{mo:02d}-{d:02d}" if (y and mo and d) else ""
-
         codes = title_to_codes(title)
         if len(codes) == 2:
-            # Named episode — index by team pair
             by_pair[frozenset(codes)] = rating
         elif date_str:
-            # Unnamed knockout episode — index by date in episode order
             by_date.setdefault(date_str, []).append(rating)
-
     return by_pair, by_date
 
 
+# ---------------------------------------------------------------------------
+# Preserve existing comments
+# ---------------------------------------------------------------------------
+
 def load_existing_comments(matches_path: str) -> dict[frozenset, str]:
-    """Preserve any oneline_comments already filled in."""
     if not os.path.exists(matches_path):
         return {}
     with open(matches_path, encoding="utf-8") as f:
@@ -186,83 +208,77 @@ def load_existing_comments(matches_path: str) -> dict[frozenset, str]:
     }
 
 
-def build_matches_from_schedule(schedule: list[dict]) -> list[dict]:
-    """
-    Convert schedule_matches entries into the matches_wc2026 format.
-    Only includes matches where both home and away are resolved.
-    """
+# ---------------------------------------------------------------------------
+# Build final match list
+# ---------------------------------------------------------------------------
+
+def build_matches(
+    schedule: list[dict],
+    scores: dict[frozenset, tuple[int, int]],
+    by_pair: dict,
+    by_date: dict,
+    existing_comments: dict[frozenset, str],
+) -> tuple[list[dict], int, int]:
+
+    date_cursor: dict[str, int] = {}
+    n_pair = n_date = 0
     out = []
+
     for m in schedule:
-        if not (m.get("home") and m.get("away")):
-            continue
+        h, a = m.get("home", ""), m.get("away", "")
+        if not (h and a):
+            continue  # skip unresolved knockout slots
+
+        pair_key = frozenset([h, a])
+        date     = m.get("date", "")
+
+        # --- scores (hg / ag / real) ---
+        if pair_key in scores:
+            hg, ag = scores[pair_key]
+            real = True
+        else:
+            hg, ag = None, None
+            real = False
+
+        # --- imdb_score ---
+        if pair_key in by_pair:
+            imdb_score = by_pair[pair_key]
+            n_pair += 1
+        elif date in by_date:
+            idx = date_cursor.get(date, 0)
+            ratings = by_date[date]
+            imdb_score = ratings[idx] if idx < len(ratings) else None
+            date_cursor[date] = idx + 1
+            if imdb_score is not None:
+                n_date += 1
+        else:
+            imdb_score = None
+
         out.append({
+            # fields the HTML frontend needs
+            "home":           h,
+            "away":           a,
+            "hg":             hg,
+            "ag":             ag,
+            "real":           real,
+            # enriched fields
             "match_id":       m.get("match_id"),
-            "date":           m.get("date"),
+            "date":           date,
             "time_et":        m.get("time_et"),
             "stage":          m.get("stage"),
             "group":          m.get("group"),
             "stadium":        m.get("stadium"),
             "city":           m.get("city"),
             "country_played": m.get("country_played"),
-            "home":           m["home"],
-            "away":           m["away"],
+            "imdb_score":     imdb_score,
+            "oneline_comment": existing_comments.get(pair_key, ""),
         })
-    return out
 
-
-def enrich_matches(
-    matches: list[dict],
-    by_pair: dict,
-    by_date: dict,
-    existing_comments: dict[frozenset, str],
-) -> tuple[list[dict], int, int]:
-    """
-    Add imdb_score and oneline_comment to every match.
-
-    Strategy:
-      1. Try by_pair (team codes) — works for group stage named episodes
-      2. Fall back to by_date (date order) — works for knockout "Episode #x.y"
-         Multiple matches on the same date are consumed in order as we iterate.
-
-    Returns (enriched, n_by_pair, n_by_date).
-    """
-    # Track consumption position per date for the by_date fallback
-    date_cursor: dict[str, int] = {}
-
-    n_by_pair = 0
-    n_by_date = 0
-    enriched  = []
-
-    for m in matches:
-        m = dict(m)
-        pair_key = frozenset([m["home"], m["away"]])
-        date     = m.get("date", "")
-
-        if pair_key in by_pair:
-            # Group stage: matched by team names
-            m["imdb_score"] = by_pair[pair_key]
-            n_by_pair += 1
-        elif date in by_date:
-            # Knockout: consume the next rating for this date in order
-            idx = date_cursor.get(date, 0)
-            ratings = by_date[date]
-            if idx < len(ratings):
-                m["imdb_score"] = ratings[idx]
-                date_cursor[date] = idx + 1
-                n_by_date += 1
-            else:
-                m["imdb_score"] = None
-        else:
-            m["imdb_score"] = None
-
-        m["oneline_comment"] = existing_comments.get(pair_key, "")
-        enriched.append(m)
-
-    return enriched, n_by_pair, n_by_date
+    return out, n_pair, n_date
 
 
 # ---------------------------------------------------------------------------
-# Main update function
+# Main
 # ---------------------------------------------------------------------------
 
 def update(
@@ -278,11 +294,16 @@ def update(
     schedule = raw_schedule if isinstance(raw_schedule, list) else raw_schedule.get("matches", [])
     print(f"[✓] Schedule loaded  : {schedule_path}  ({len(schedule)} total slots)")
 
-    # 2. Find latest IMDb file
+    # 2. Fetch scores
+    try:
+        scores = fetch_scores()
+    except Exception as e:
+        print(f"[!] Could not fetch scores: {e} — real=False for all matches")
+        scores = {}
+
+    # 3. Latest IMDb file
     imdb_path = find_latest_imdb_file(imdb_dir, prefix)
     print(f"[✓] Latest IMDb file : {imdb_path}")
-
-    # 3. Load IMDb episodes
     with open(imdb_path, encoding="utf-8") as f:
         imdb_data = json.load(f)
     episodes = imdb_data.get("episodes", imdb_data) if isinstance(imdb_data, dict) else imdb_data
@@ -290,90 +311,40 @@ def update(
     # 4. Preserve existing comments
     existing_comments = load_existing_comments(matches_path)
 
-    # 5. Build base match list from schedule (resolved only)
-    matches = build_matches_from_schedule(schedule)
-    print(f"[✓] Resolved matches : {len(matches)}  (unresolved knockouts skipped)")
-
-    # 6. Build IMDb lookups and enrich
+    # 5. Build IMDb lookups
     by_pair, by_date = build_imdb_lookups(episodes)
-    enriched, n_pair, n_date = enrich_matches(matches, by_pair, by_date, existing_comments)
-    print(f"[✓] IMDb scores found: {n_pair + n_date}  "
-          f"({n_pair} by team pair, {n_date} by date)")
 
-    # 7. Build output
-    out = {
-        "last_updated":     datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "source_imdb_file": os.path.basename(imdb_path),
-        "source_schedule":  os.path.basename(schedule_path),
-        "matches":          enriched,
-    }
+    # 6. Build output
+    enriched, n_pair, n_date = build_matches(schedule, scores, by_pair, by_date, existing_comments)
+    real_count = sum(1 for m in enriched if m["real"])
+    print(f"[✓] Resolved matches : {len(enriched)}")
+    print(f"[✓] With scores      : {real_count}  (real=True)")
+    print(f"[✓] IMDb scores found: {n_pair + n_date}  ({n_pair} by team pair, {n_date} by date)")
 
     if dry_run:
-        print("\n[dry-run] Output preview (first 3 matches):")
-        preview = dict(out)
-        preview["matches"] = enriched[:3]
-        print(json.dumps(preview, indent=2, ensure_ascii=False))
+        print("\n[dry-run] First 3 entries:")
+        print(json.dumps(enriched[:3], indent=2, ensure_ascii=False))
         return
 
-    # 8. Backup + write
+    # 7. Backup + write as plain array (what the HTML expects)
     if os.path.exists(matches_path):
-        bak = matches_path + ".bak"
-        shutil.copy2(matches_path, bak)
-        print(f"[✓] Backup saved     : {bak}")
+        shutil.copy2(matches_path, matches_path + ".bak")
+        print(f"[✓] Backup saved     : {matches_path}.bak")
 
     with open(matches_path, "w", encoding="utf-8") as f:
-        json.dump(out, f, indent=2, ensure_ascii=False)
+        json.dump(enriched, f, indent=2, ensure_ascii=False)
     print(f"[✓] Updated          : {matches_path}")
 
 
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
-
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Build matches_wc2026.json from schedule + IMDb ratings",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=(
-            "Examples:\n"
-            "  python3 update_matches.py\n"
-            "  python3 update_matches.py --dry-run\n"
-        ),
-    )
-    parser.add_argument(
-        "--schedule",
-        default="../data/schedule/schedule_matches.json",
-        help="Path to schedule_matches.json",
-    )
-    parser.add_argument(
-        "--matches",
-        default="../data/frontend/matches_wc2026.json",
-        help="Path to matches_wc2026.json output",
-    )
-    parser.add_argument(
-        "--imdb-dir",
-        default="../data/imdb/",
-        help="Directory with wc2026_<timestamp>.json files",
-    )
-    parser.add_argument(
-        "--prefix",
-        default="wc2026_",
-        help="IMDb filename prefix  (default: wc2026_)",
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Preview output without writing any files",
-    )
+    parser = argparse.ArgumentParser(description="Build matches_wc2026.json")
+    parser.add_argument("--schedule", default="../data/schedule/schedule_matches.json")
+    parser.add_argument("--matches",  default="../data/frontend/matches_wc2026.json")
+    parser.add_argument("--imdb-dir", default="../data/imdb/")
+    parser.add_argument("--prefix",   default="wc2026_")
+    parser.add_argument("--dry-run",  action="store_true")
     args = parser.parse_args()
-
-    update(
-        schedule_path=args.schedule,
-        matches_path=args.matches,
-        imdb_dir=args.imdb_dir,
-        prefix=args.prefix,
-        dry_run=args.dry_run,
-    )
+    update(args.schedule, args.matches, args.imdb_dir, args.prefix, args.dry_run)
 
 
 if __name__ == "__main__":

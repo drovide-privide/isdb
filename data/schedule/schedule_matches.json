@@ -1,8 +1,7 @@
 {
-  "last_updated": "2026-06-18T17:22:19Z",
+  "last_updated": "2026-06-19T00:00:00Z",
   "source": "FIFA World Cup 2026 Official Schedule",
   "total_matches": 104,
-  "notes": "Times in ET. home/away empty for undecided knockout matches.",
   "matches": [
     {
       "match_id": 1,
@@ -26,8 +25,8 @@
       "stadium": "Estadio Akron",
       "city": "Zapopan",
       "country_played": "Mexico",
-      "home": "",
-      "away": "",
+      "home": "KOR",
+      "away": "CZE",
       "played": true
     },
     {
@@ -52,8 +51,8 @@
       "stadium": "SoFi Stadium",
       "city": "Inglewood",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "USA",
+      "away": "PAR",
       "played": true
     },
     {
@@ -65,8 +64,8 @@
       "stadium": "Levi's Stadium",
       "city": "Santa Clara",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "QAT",
+      "away": "SUI",
       "played": true
     },
     {
@@ -78,8 +77,8 @@
       "stadium": "MetLife Stadium",
       "city": "East Rutherford",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "BRA",
+      "away": "MAR",
       "played": true
     },
     {
@@ -91,21 +90,21 @@
       "stadium": "Gillette Stadium",
       "city": "Foxborough",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "HAI",
+      "away": "SCO",
       "played": true
     },
     {
       "match_id": 8,
-      "date": "2026-06-14",
-      "time_et": "12:00",
+      "date": "2026-06-13",
+      "time_et": "00:00",
       "stage": "Group Stage",
       "group": "D",
       "stadium": "BC Place",
       "city": "Vancouver",
       "country_played": "Canada",
-      "home": "",
-      "away": "",
+      "home": "AUS",
+      "away": "TUR",
       "played": true
     },
     {
@@ -117,8 +116,8 @@
       "stadium": "NRG Stadium",
       "city": "Houston",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "GER",
+      "away": "CUW",
       "played": true
     },
     {
@@ -130,8 +129,8 @@
       "stadium": "AT&T Stadium",
       "city": "Arlington",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "NED",
+      "away": "JPN",
       "played": true
     },
     {
@@ -143,8 +142,8 @@
       "stadium": "Lincoln Financial Field",
       "city": "Philadelphia",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "CIV",
+      "away": "ECU",
       "played": true
     },
     {
@@ -156,8 +155,8 @@
       "stadium": "Estadio BBVA",
       "city": "Monterrey",
       "country_played": "Mexico",
-      "home": "",
-      "away": "",
+      "home": "SWE",
+      "away": "TUN",
       "played": true
     },
     {
@@ -169,8 +168,8 @@
       "stadium": "Mercedes-Benz Stadium",
       "city": "Atlanta",
       "country_played": "USA",
-      "home": "BEL",
-      "away": "EGY",
+      "home": "ESP",
+      "away": "CPV",
       "played": true
     },
     {
@@ -182,8 +181,8 @@
       "stadium": "Lumen Field",
       "city": "Seattle",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "BEL",
+      "away": "EGY",
       "played": true
     },
     {
@@ -195,8 +194,8 @@
       "stadium": "Hard Rock Stadium",
       "city": "Miami Gardens",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "KSA",
+      "away": "URU",
       "played": true
     },
     {
@@ -208,8 +207,8 @@
       "stadium": "SoFi Stadium",
       "city": "Inglewood",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "IRN",
+      "away": "NZL",
       "played": true
     },
     {
@@ -221,8 +220,8 @@
       "stadium": "MetLife Stadium",
       "city": "East Rutherford",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "FRA",
+      "away": "SEN",
       "played": true
     },
     {
@@ -234,8 +233,8 @@
       "stadium": "Gillette Stadium",
       "city": "Foxborough",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "IRQ",
+      "away": "NOR",
       "played": true
     },
     {
@@ -247,73 +246,73 @@
       "stadium": "Arrowhead Stadium",
       "city": "Kansas City",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "ARG",
+      "away": "ALG",
       "played": true
     },
     {
       "match_id": 20,
-      "date": "2026-06-17",
-      "time_et": "12:00",
+      "date": "2026-06-16",
+      "time_et": "00:00",
       "stage": "Group Stage",
       "group": "J",
       "stadium": "Levi's Stadium",
       "city": "Santa Clara",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "AUT",
+      "away": "JOR",
       "played": true
     },
     {
       "match_id": 21,
       "date": "2026-06-17",
-      "time_et": "15:00",
+      "time_et": "12:00",
       "stage": "Group Stage",
       "group": "K",
       "stadium": "NRG Stadium",
       "city": "Houston",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "POR",
+      "away": "COD",
       "played": true
     },
     {
       "match_id": 22,
       "date": "2026-06-17",
-      "time_et": "18:00",
+      "time_et": "15:00",
       "stage": "Group Stage",
       "group": "L",
       "stadium": "AT&T Stadium",
       "city": "Arlington",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "ENG",
+      "away": "CRO",
       "played": true
     },
     {
       "match_id": 23,
       "date": "2026-06-17",
-      "time_et": "21:00",
+      "time_et": "18:00",
       "stage": "Group Stage",
       "group": "L",
       "stadium": "BMO Field",
       "city": "Toronto",
       "country_played": "Canada",
-      "home": "",
-      "away": "",
+      "home": "GHA",
+      "away": "PAN",
       "played": true
     },
     {
       "match_id": 24,
       "date": "2026-06-17",
-      "time_et": "00:00",
+      "time_et": "21:00",
       "stage": "Group Stage",
       "group": "K",
       "stadium": "Estadio Azteca",
       "city": "Mexico City",
       "country_played": "Mexico",
-      "home": "",
-      "away": "",
+      "home": "UZB",
+      "away": "COL",
       "played": true
     },
     {
@@ -338,8 +337,8 @@
       "stadium": "SoFi Stadium",
       "city": "Inglewood",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "SUI",
+      "away": "BIH",
       "played": false
     },
     {
@@ -351,8 +350,8 @@
       "stadium": "BC Place",
       "city": "Vancouver",
       "country_played": "Canada",
-      "home": "",
-      "away": "",
+      "home": "CAN",
+      "away": "QAT",
       "played": false
     },
     {
@@ -364,8 +363,8 @@
       "stadium": "Estadio Akron",
       "city": "Zapopan",
       "country_played": "Mexico",
-      "home": "",
-      "away": "",
+      "home": "MEX",
+      "away": "KOR",
       "played": false
     },
     {
@@ -377,8 +376,8 @@
       "stadium": "Lumen Field",
       "city": "Seattle",
       "country_played": "USA",
-      "home": "SCO",
-      "away": "MAR",
+      "home": "USA",
+      "away": "AUS",
       "played": false
     },
     {
@@ -390,8 +389,8 @@
       "stadium": "Gillette Stadium",
       "city": "Foxborough",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "SCO",
+      "away": "MAR",
       "played": false
     },
     {
@@ -403,8 +402,8 @@
       "stadium": "Lincoln Financial Field",
       "city": "Philadelphia",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "BRA",
+      "away": "HAI",
       "played": false
     },
     {
@@ -416,8 +415,8 @@
       "stadium": "Levi's Stadium",
       "city": "Santa Clara",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "TUR",
+      "away": "PAR",
       "played": false
     },
     {
@@ -429,8 +428,8 @@
       "stadium": "NRG Stadium",
       "city": "Houston",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "NED",
+      "away": "SWE",
       "played": false
     },
     {
@@ -442,8 +441,8 @@
       "stadium": "BMO Field",
       "city": "Toronto",
       "country_played": "Canada",
-      "home": "",
-      "away": "",
+      "home": "GER",
+      "away": "CIV",
       "played": false
     },
     {
@@ -455,21 +454,21 @@
       "stadium": "Arrowhead Stadium",
       "city": "Kansas City",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "ECU",
+      "away": "CUW",
       "played": false
     },
     {
       "match_id": 36,
-      "date": "2026-06-21",
+      "date": "2026-06-20",
       "time_et": "00:00",
       "stage": "Group Stage",
       "group": "F",
       "stadium": "Estadio BBVA",
       "city": "Monterrey",
       "country_played": "Mexico",
-      "home": "",
-      "away": "",
+      "home": "TUN",
+      "away": "JPN",
       "played": false
     },
     {
@@ -481,8 +480,8 @@
       "stadium": "Mercedes-Benz Stadium",
       "city": "Atlanta",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "ESP",
+      "away": "KSA",
       "played": false
     },
     {
@@ -494,8 +493,8 @@
       "stadium": "SoFi Stadium",
       "city": "Inglewood",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "BEL",
+      "away": "IRN",
       "played": false
     },
     {
@@ -507,8 +506,8 @@
       "stadium": "Hard Rock Stadium",
       "city": "Miami Gardens",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "URU",
+      "away": "CPV",
       "played": false
     },
     {
@@ -520,8 +519,8 @@
       "stadium": "BC Place",
       "city": "Vancouver",
       "country_played": "Canada",
-      "home": "",
-      "away": "",
+      "home": "NZL",
+      "away": "EGY",
       "played": false
     },
     {
@@ -533,8 +532,8 @@
       "stadium": "AT&T Stadium",
       "city": "Arlington",
       "country_played": "USA",
-      "home": "FRA",
-      "away": "IRQ",
+      "home": "ARG",
+      "away": "AUT",
       "played": false
     },
     {
@@ -546,8 +545,8 @@
       "stadium": "Lincoln Financial Field",
       "city": "Philadelphia",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "FRA",
+      "away": "IRQ",
       "played": false
     },
     {
@@ -559,8 +558,8 @@
       "stadium": "MetLife Stadium",
       "city": "East Rutherford",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "NOR",
+      "away": "SEN",
       "played": false
     },
     {
@@ -572,8 +571,8 @@
       "stadium": "Levi's Stadium",
       "city": "Santa Clara",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "JOR",
+      "away": "ALG",
       "played": false
     },
     {
@@ -598,8 +597,8 @@
       "stadium": "Gillette Stadium",
       "city": "Foxborough",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "ENG",
+      "away": "GHA",
       "played": false
     },
     {
@@ -611,8 +610,8 @@
       "stadium": "BMO Field",
       "city": "Toronto",
       "country_played": "Canada",
-      "home": "",
-      "away": "",
+      "home": "PAN",
+      "away": "CRO",
       "played": false
     },
     {
@@ -624,8 +623,8 @@
       "stadium": "Estadio Akron",
       "city": "Zapopan",
       "country_played": "Mexico",
-      "home": "",
-      "away": "",
+      "home": "COL",
+      "away": "COD",
       "played": false
     },
     {
@@ -637,8 +636,8 @@
       "stadium": "BC Place",
       "city": "Vancouver",
       "country_played": "Canada",
-      "home": "CZE",
-      "away": "MEX",
+      "home": "SUI",
+      "away": "CAN",
       "played": false
     },
     {
@@ -650,8 +649,8 @@
       "stadium": "Lumen Field",
       "city": "Seattle",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "BIH",
+      "away": "QAT",
       "played": false
     },
     {
@@ -663,8 +662,8 @@
       "stadium": "Hard Rock Stadium",
       "city": "Miami Gardens",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "SCO",
+      "away": "BRA",
       "played": false
     },
     {
@@ -676,8 +675,8 @@
       "stadium": "Mercedes-Benz Stadium",
       "city": "Atlanta",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "MAR",
+      "away": "HAI",
       "played": false
     },
     {
@@ -689,8 +688,8 @@
       "stadium": "Estadio Azteca",
       "city": "Mexico City",
       "country_played": "Mexico",
-      "home": "",
-      "away": "",
+      "home": "CZE",
+      "away": "MEX",
       "played": false
     },
     {
@@ -702,8 +701,8 @@
       "stadium": "Estadio BBVA",
       "city": "Monterrey",
       "country_played": "Mexico",
-      "home": "",
-      "away": "",
+      "home": "RSA",
+      "away": "KOR",
       "played": false
     },
     {
@@ -715,8 +714,8 @@
       "stadium": "Lincoln Financial Field",
       "city": "Philadelphia",
       "country_played": "USA",
-      "home": "TUR",
-      "away": "USA",
+      "home": "CUW",
+      "away": "CIV",
       "played": false
     },
     {
@@ -728,8 +727,8 @@
       "stadium": "MetLife Stadium",
       "city": "East Rutherford",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "ECU",
+      "away": "GER",
       "played": false
     },
     {
@@ -741,8 +740,8 @@
       "stadium": "AT&T Stadium",
       "city": "Arlington",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "JPN",
+      "away": "SWE",
       "played": false
     },
     {
@@ -754,8 +753,8 @@
       "stadium": "Arrowhead Stadium",
       "city": "Kansas City",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "TUN",
+      "away": "NED",
       "played": false
     },
     {
@@ -767,8 +766,8 @@
       "stadium": "SoFi Stadium",
       "city": "Inglewood",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "TUR",
+      "away": "USA",
       "played": false
     },
     {
@@ -780,8 +779,8 @@
       "stadium": "Levi's Stadium",
       "city": "Santa Clara",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "PAR",
+      "away": "AUS",
       "played": false
     },
     {
@@ -793,8 +792,8 @@
       "stadium": "Gillette Stadium",
       "city": "Foxborough",
       "country_played": "USA",
-      "home": "EGY",
-      "away": "IRN",
+      "home": "NOR",
+      "away": "FRA",
       "played": false
     },
     {
@@ -806,8 +805,8 @@
       "stadium": "BMO Field",
       "city": "Toronto",
       "country_played": "Canada",
-      "home": "",
-      "away": "",
+      "home": "SEN",
+      "away": "IRQ",
       "played": false
     },
     {
@@ -819,8 +818,8 @@
       "stadium": "NRG Stadium",
       "city": "Houston",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "CPV",
+      "away": "KSA",
       "played": false
     },
     {
@@ -832,8 +831,8 @@
       "stadium": "Estadio Akron",
       "city": "Zapopan",
       "country_played": "Mexico",
-      "home": "",
-      "away": "",
+      "home": "URU",
+      "away": "ESP",
       "played": false
     },
     {
@@ -845,8 +844,8 @@
       "stadium": "Lumen Field",
       "city": "Seattle",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "EGY",
+      "away": "IRN",
       "played": false
     },
     {
@@ -858,8 +857,8 @@
       "stadium": "BC Place",
       "city": "Vancouver",
       "country_played": "Canada",
-      "home": "",
-      "away": "",
+      "home": "NZL",
+      "away": "BEL",
       "played": false
     },
     {
@@ -871,8 +870,8 @@
       "stadium": "MetLife Stadium",
       "city": "East Rutherford",
       "country_played": "USA",
-      "home": "ALG",
-      "away": "AUT",
+      "home": "PAN",
+      "away": "ENG",
       "played": false
     },
     {
@@ -884,8 +883,8 @@
       "stadium": "Lincoln Financial Field",
       "city": "Philadelphia",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "CRO",
+      "away": "GHA",
       "played": false
     },
     {
@@ -897,8 +896,8 @@
       "stadium": "Hard Rock Stadium",
       "city": "Miami Gardens",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "COL",
+      "away": "POR",
       "played": false
     },
     {
@@ -910,8 +909,8 @@
       "stadium": "Mercedes-Benz Stadium",
       "city": "Atlanta",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "COD",
+      "away": "UZB",
       "played": false
     },
     {
@@ -923,8 +922,8 @@
       "stadium": "Arrowhead Stadium",
       "city": "Kansas City",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "ALG",
+      "away": "AUT",
       "played": false
     },
     {
@@ -936,8 +935,8 @@
       "stadium": "AT&T Stadium",
       "city": "Arlington",
       "country_played": "USA",
-      "home": "",
-      "away": "",
+      "home": "JOR",
+      "away": "ARG",
       "played": false
     },
     {

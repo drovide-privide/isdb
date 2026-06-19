@@ -52,18 +52,18 @@
       <div>
         <div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;color:{{ accent }};margin-bottom:8px">MATCH EXCITINGNESS RATING</div>
         <h1 style="margin:0;font-size:46px;font-weight:800;letter-spacing:-1.2px;line-height:0.98">Match Ratings</h1>
-        <p style="margin:12px 0 0;font-size:15.5px;color:#9aa3b2;max-width:500px;line-height:1.5">Every match of the 2026 World Cup, scored out of 10 and shaded from dire to classic. Scores are derived from match events and statistics, validated against historical football ratings including WC 2022 data from IMDb. Click any cell for the full match card.</p>
+        <p style="margin:12px 0 0;font-size:15.5px;color:#9aa3b2;max-width:500px;line-height:1.5">Every match of the 2026 World Cup, scored out of 10 and shaded from dire to classic. Ratings sourced from IMDb fan votes. Click any cell for the full match card.</p>
       </div>
       <!-- GRADIENT LEGEND -->
       <div style="display:flex;flex-direction:column;gap:10px;background:#11151d;border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:15px 18px;min-width:248px">
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:#7d8696">FAN RATING</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:#7d8696">IMDb FAN RATING</div>
         <div style="height:12px;border-radius:6px;background:linear-gradient(90deg, rgb(194,57,43), rgb(230,126,34), rgb(241,196,15), rgb(120,193,70), rgb(30,158,87))"></div>
         <div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:10.5px;color:#9aa3b2">
           <span>3 · Dire</span><span>6 · Watchable</span><span>9 · Classic</span>
         </div>
         <div style="display:flex;align-items:center;gap:8px;margin-top:2px;font-size:11.5px;color:#7d8696">
           <span style="width:7px;height:7px;border-radius:50%;background:#eef1f6;box-shadow:0 0 0 2px rgba(255,255,255,0.15)"></span>
-          dot = final result · others projected
+          dot = IMDb rated · – = rating pending
         </div>
       </div>
     </div>
@@ -115,7 +115,7 @@
       </div>
     </div>
 
-    <div style="font-family:'DM Mono',monospace;font-size:11px;color:#5b6473;margin-top:14px;line-height:1.6">Group A–L results through Jun 15 are final · matches from Jun 16 are ISEDb projections from a simple team-strength model · ratings illustrative</div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;color:#5b6473;margin-top:14px;line-height:1.6">Ratings sourced from IMDb fan votes · – means rating not yet available · scores update automatically after each match</div>
 
   </div>
 
@@ -158,7 +158,7 @@
         <div style="width:78px;height:78px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:{{ sel.bg }};color:{{ sel.fg }};font-family:'DM Mono',monospace;font-size:30px;font-weight:500">{{ sel.rating }}</div>
         <div>
           <div style="font-size:22px;font-weight:800;letter-spacing:-0.4px;color:{{ sel.bg }}">{{ sel.tier }}</div>
-          <div style="font-size:13px;color:#9aa3b2;margin-top:3px">ISEDb fan rating · {{ sel.votes }} votes</div>
+          <div style="font-size:13px;color:#9aa3b2;margin-top:3px">IMDb fan rating · {{ sel.votes }} votes</div>
           <div style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.5px;color:{{ sel.statusColor }};background:{{ sel.statusBg }};border-radius:999px;padding:3px 9px">{{ sel.status }}</div>
         </div>
       </div>
@@ -223,7 +223,7 @@ class Component extends DCLogic {
   async _loadData(){
     const [teamsRes, matchesRes] = await Promise.all([
       fetch('./teams.json'),
-      fetch('./matches.json')
+      fetch('./data/frontend/matches_wc2026.json')
     ]);
     const teamsRaw = await teamsRes.json();
     const matchesRaw = await matchesRes.json();
@@ -265,16 +265,8 @@ class Component extends DCLogic {
   }
 
   pois(l, rnd){ const L=Math.exp(-l); let k=0, p=1; do{ k++; p*=rnd(); }while(p>L); return Math.min(k-1, 7); }
-  predict(h, a, rnd, isGroup){
-    const hs = h.str ?? 70, as = a.str ?? 70;
-    const d = hs - as;
-    let lamH=1.2 + d*0.026 + (isGroup?0.12:0.05);
-    let lamA=1.2 - d*0.026;
-    lamH=Math.max(0.2, Math.min(3.9, lamH)); lamA=Math.max(0.18, Math.min(3.6, lamA));
-    return [this.pois(lamH, rnd), this.pois(lamA, rnd)];
-  }
 
-  makeMatch(id, stageKey, round, home, away, hg, ag, isReal){
+  makeMatch(id, stageKey, round, home, away, hg, ag, isReal, imdbScore=null){
     const hasScore = isReal;
     if(!hasScore){
       return {
@@ -285,24 +277,21 @@ class Component extends DCLogic {
         winner: null, pens:''
       };
     }
-    const rnd=this.rng('rate'+id);
-    const total=hg+ag, margin=Math.abs(hg-ag);
-    let rt = 4.4 + Math.min(total,7)*0.5 + (margin<=1?1.0:(margin===2?0.2:-0.5));
-    const hs=home.str??70, as=away.str??70;
-    if((hg>ag && hs+8<as) || (ag>hg && as+8<hs)) rt += 0.8;
-    rt += (rnd()-0.42)*2.2;
-    rt = Math.max(2.2, Math.min(9.7, Math.round(rt*10)/10));
-    const col=this.ratingColor(rt);
-    const tier=this.tier(rt);
-    const vl=this.VERDICTS[tier]; const verdict=vl[Math.floor(rnd()*vl.length)];
-    const poss=39+Math.floor(rnd()*23);
-    const shots=[6+Math.floor(rnd()*14), 6+Math.floor(rnd()*14)];
-    const xg=[(0.3+rnd()*2.6).toFixed(1), (0.3+rnd()*2.6).toFixed(1)];
-    const votes=(3+rnd()*44).toFixed(1)+'k';
+    const rnd = this.rng('rate'+id);
+    // Use IMDb score if available, otherwise show played match with no rating
+    const rt = (typeof imdbScore === 'number' && imdbScore !== null) ? imdbScore : null;
+    const col = rt !== null ? this.ratingColor(rt) : {bg:'#1a1f2a', fg:'#7d8696'};
+    const tier = rt !== null ? this.tier(rt) : null;
+    const vl = tier ? this.VERDICTS[tier] : ['IMDb rating not yet available.'];
+    const verdict = vl[Math.floor(rnd()*vl.length)];
+    const poss = 39+Math.floor(rnd()*23);
+    const shots = [6+Math.floor(rnd()*14), 6+Math.floor(rnd()*14)];
+    const xg = [(0.3+rnd()*2.6).toFixed(1), (0.3+rnd()*2.6).toFixed(1)];
+    const votes = rt !== null ? (3+rnd()*44).toFixed(1)+'k' : '–';
     return {
       id, stageKey, round, isReal, hasScore: true,
       home:{...home, g:hg}, away:{...away, g:ag},
-      rating:rt, bg:col.bg, fg:col.fg, tier, verdict, poss, shots, xg, votes,
+      rating: rt, bg: col.bg, fg: col.fg, tier, verdict, poss, shots, xg, votes,
       winner: hg>ag?'h':(ag>hg?'a':'d'), pens:''
     };
   }
@@ -321,7 +310,7 @@ class Component extends DCLogic {
 
     const real = {};
     matchesRaw.forEach(m => {
-      if(m.real) real[m.home + '|' + m.away] = [m.hg, m.ag];
+      if(m.real) real[m.home + '|' + m.away] = { hg: m.hg, ag: m.ag, imdb_score: m.imdb_score ?? null };
     });
 
     const cols={MD1:[],MD2:[],MD3:[],R32:[],R16:[],QF:[],SF:[],FIN:[]};
@@ -332,9 +321,9 @@ class Component extends DCLogic {
       const id=stageKey+'-'+(gidx++);
       const key=home.code+'|'+away.code;
       let hg=0,ag=0,isReal=false;
-      if(real[key]){ hg=real[key][0]; ag=real[key][1]; isReal=true; }
+      if(real[key]){ hg=real[key].hg; ag=real[key].ag; isReal=true; }
       if(isReal){ addPts(g,home,hg,ag); addPts(g,away,ag,hg); }
-      cols[stageKey].push(this.makeMatch(id,stageKey,roundName,home,away,hg,ag,isReal));
+      cols[stageKey].push(this.makeMatch(id,stageKey,roundName,home,away,hg,ag,isReal,real[key]?.imdb_score ?? null));
     };
     order.forEach(g=>{ const t=teams[g];
       mkGroup('MD1','Matchday 1',g,t[0],t[1]); mkGroup('MD1','Matchday 1',g,t[2],t[3]);
@@ -413,7 +402,13 @@ class Component extends DCLogic {
 
     const colLists=order.map(k=>{
       let list=this.data.cols[k].filter(filt);
-      if(sort==='rating') list=list.slice().sort((a,b)=>b.rating-a.rating);
+      if(sort==='rating') list=list.slice().sort((a,b)=>{
+        // push null ratings to bottom
+        if(a.rating===null && b.rating===null) return 0;
+        if(a.rating===null) return 1;
+        if(b.rating===null) return -1;
+        return b.rating-a.rating;
+      });
       return list;
     });
     const maxRows=Math.max(1, ...colLists.map(l=>l.length));
@@ -431,22 +426,22 @@ class Component extends DCLogic {
         const hasTeams = m.home.code !== 'TBD';
         const iconW = compact ? 21 : 24;
         const iconH = compact ? 16 : 18;
-        const tint = m.hasScore ? m.bg.replace('rgb(','rgba(').replace(')',',0.30)') : 'rgba(255,255,255,0.08)';
+        const tint = (m.hasScore && m.rating !== null) ? m.bg.replace('rgb(','rgba(').replace(')',',0.30)') : 'rgba(255,255,255,0.08)';
         const flagBase = {width:iconW+'px', height:iconH+'px', borderRadius:'4px', objectFit:'cover', flexShrink:0, transition:'opacity 0.2s ease, transform 0.2s ease', boxShadow:'inset 0 0 0 '+iconW+'px '+tint+', 0 1px 3px rgba(0,0,0,0.45)', transform:'scale(0.7)'};
         const flagIconStyle = hasTeams ? {...flagBase, opacity:0} : {display:'none'};
-        const emptyFlagStyle = !hasTeams ? {width:iconW+'px', height:iconH+'px', borderRadius:'4px', flexShrink:0, background:'rgba(255,255,255,0.06)'} : {display:'none'};
-        const bg = m.hasScore ? m.bg : 'transparent';
-        const fg = m.hasScore ? m.fg : '#5b6473';
+        const bg = (m.hasScore && m.rating !== null) ? m.bg : (m.hasScore ? '#1a1f2a' : 'transparent');
+        const fg = (m.hasScore && m.rating !== null) ? m.fg : (m.hasScore ? '#5b6473' : '#5b6473');
         const selShadow = seld ? `, 0 0 0 2px #0e121a, 0 0 0 4px ${accent}` : '';
         const style={position:'relative', height:H+'px', borderRadius:'7px', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 6px', gap:'4px', overflow:'hidden', background:bg, color:fg, cursor:'pointer', transition:'transform .09s ease, box-shadow .09s ease', boxShadow: outline+selShadow};
         const scoreRowStyle = {flex:1, display:'flex', alignItems:'center', justifyContent:'center', gap:'4px', fontFamily:"'DM Mono',monospace", fontSize:(compact?11:12)+'px', fontWeight:500};
-        const dotStyle = m.isReal ? {width:'4px', height:'4px', borderRadius:'50%', background:fg, opacity:0.75, flexShrink:0} : {display:'none'};
+        // dot only shown when we have a real IMDb rating
+        const dotStyle = (m.isReal && m.rating !== null) ? {width:'4px', height:'4px', borderRadius:'50%', background:fg, opacity:0.75, flexShrink:0} : {display:'none'};
         const cellHoverStyle={transform:'scale(1.09)', zIndex:5, boxShadow:'0 8px 20px rgba(0,0,0,0.55)'};
         return {
           homeFlag: m.home.flag, awayFlag: m.away.flag,
           hasTeams, hasScore: m.hasScore,
-          score: m.hasScore ? m.rating.toFixed(1) : '',
-          style, flagIconStyle, emptyFlagStyle, scoreRowStyle, dotStyle,
+          score: m.hasScore ? (m.rating !== null ? m.rating.toFixed(1) : '–') : '',
+          style, flagIconStyle, scoreRowStyle, dotStyle,
           hover: cellHoverStyle,
           onClick:()=>this.setState({sel:m, hover:null}),
           onEnter:(e)=>{ this.setState({hover:{m, x:e.clientX, y:e.clientY}}); e.currentTarget.querySelectorAll('.cell-flag').forEach(f=>{ f.style.opacity='1'; f.style.transform='scale(1)'; }); },
@@ -478,7 +473,8 @@ class Component extends DCLogic {
     const shown=[].concat(...colLists);
     const shownCount=shown.length;
     const realCount=shown.filter(m=>m.isReal).length;
-    const avgScore=shownCount?(shown.filter(m=>m.hasScore).reduce((s,m)=>s+m.rating,0)/Math.max(1,shown.filter(m=>m.hasScore).length)).toFixed(2):'0.00';
+    const ratedMatches=shown.filter(m=>m.rating!==null);
+    const avgScore=ratedMatches.length?(ratedMatches.reduce((s,m)=>s+m.rating,0)/ratedMatches.length).toFixed(2):'–';
     const sortNote = sort==='rating' ? 'ranked best → worst per stage' : 'in fixture order';
 
     const grad=(t)=>'linear-gradient(90deg,'+t.c1+' 0 50%,'+t.c2+' 50% 100%)';
@@ -489,15 +485,17 @@ class Component extends DCLogic {
       const m=this.state.hover.m;
       if(!m.hasScore){ hover={visible:false}; }
       else {
-      const rc=this.ratingColor(m.rating);
-      hover={
-        visible:true, stage:this.stageLabel(m), tier:m.tier, rating:m.rating.toFixed(1), ratingColor:rc.bg,
-        verdict: m.verdict,
-        status: m.isReal?'● FULL TIME':'PROJECTED', statusColor: m.isReal?'#3fb968':'#7d8696',
-        home:{name:m.home.name, g:m.home.g, grad:grad(m.home), color:scoreCol(m,'h'), flag:m.home.flag},
-        away:{name:m.away.name, g:m.away.g, grad:grad(m.away), color:scoreCol(m,'a'), flag:m.away.flag},
-        style:{position:'fixed', left:0, top:0, transform:'translate('+(this.state.hover.x+14)+'px,'+(this.state.hover.y+14)+'px)', zIndex:50, pointerEvents:'none', background:'rgba(20,24,34,0.97)', border:'1px solid rgba(255,255,255,0.10)', borderRadius:'11px', padding:'11px 13px', boxShadow:'0 10px 28px rgba(0,0,0,0.6)', width:'220px'}
-      };
+        const rc = m.rating !== null ? this.ratingColor(m.rating) : {bg:'#5b6473'};
+        hover={
+          visible:true, stage:this.stageLabel(m), tier:m.tier, 
+          rating: m.rating !== null ? m.rating.toFixed(1) : '–',
+          ratingColor: rc.bg,
+          verdict: m.verdict,
+          status: m.isReal?'● FULL TIME':'PROJECTED', statusColor: m.isReal?'#3fb968':'#7d8696',
+          home:{name:m.home.name, g:m.home.g, grad:grad(m.home), color:scoreCol(m,'h'), flag:m.home.flag},
+          away:{name:m.away.name, g:m.away.g, grad:grad(m.away), color:scoreCol(m,'a'), flag:m.away.flag},
+          style:{position:'fixed', left:0, top:0, transform:'translate('+(this.state.hover.x+14)+'px,'+(this.state.hover.y+14)+'px)', zIndex:50, pointerEvents:'none', background:'rgba(20,24,34,0.97)', border:'1px solid rgba(255,255,255,0.10)', borderRadius:'11px', padding:'11px 13px', boxShadow:'0 10px 28px rgba(0,0,0,0.6)', width:'220px'}
+        };
       }
     }
 
@@ -516,16 +514,22 @@ class Component extends DCLogic {
           shotsLine:'– – –', xgLine:'– – –'
         };
       } else {
-      const note = m.winner==='d' ? 'Drawn' : ((m.winner==='h'?m.home.name:m.away.name)+' win'+m.pens);
-      sel={
-        open:true, stage:this.stageLabel(m), rating:m.rating.toFixed(1), bg:m.bg, fg:m.fg, tier:m.tier, verdict:m.verdict, votes:m.votes,
-        status: m.isReal?'● FULL TIME':'ISEDb PROJECTION', statusColor: m.isReal?'#3fb968':'#9aa3b2', statusBg: m.isReal?'rgba(63,185,104,0.14)':'rgba(255,255,255,0.06)',
-        resultNote:note,
-        home:{name:m.home.name, sub:m.home.code+' · GRP '+m.home.grp, g:m.home.g, grad:grad(m.home), scoreColor:scoreCol(m,'h'), flag:m.home.flag},
-        away:{name:m.away.name, sub:m.away.code+' · GRP '+m.away.grp, g:m.away.g, grad:grad(m.away), scoreColor:scoreCol(m,'a'), flag:m.away.flag},
-        poss:m.poss, possA:100-m.poss, possBar:{width:m.poss+'%', background:accent, height:'6px'},
-        shotsLine:m.shots[0]+' – '+m.shots[1], xgLine:m.xg[0]+' – '+m.xg[1]
-      };
+        const hasRating = m.rating !== null;
+        const col = hasRating ? {bg:m.bg, fg:m.fg} : {bg:'#1a1f2a', fg:'#7d8696'};
+        const note = m.winner==='d' ? 'Drawn' : ((m.winner==='h'?m.home.name:m.away.name)+' win'+m.pens);
+        sel={
+          open:true, stage:this.stageLabel(m),
+          rating: hasRating ? m.rating.toFixed(1) : '–',
+          bg: col.bg, fg: col.fg,
+          tier: hasRating ? m.tier : 'No rating yet',
+          verdict: m.verdict, votes: m.votes,
+          status:'● FULL TIME', statusColor:'#3fb968', statusBg:'rgba(63,185,104,0.14)',
+          resultNote:note,
+          home:{name:m.home.name, sub:m.home.code+' · GRP '+m.home.grp, g:m.home.g, grad:grad(m.home), scoreColor:scoreCol(m,'h'), flag:m.home.flag},
+          away:{name:m.away.name, sub:m.away.code+' · GRP '+m.away.grp, g:m.away.g, grad:grad(m.away), scoreColor:scoreCol(m,'a'), flag:m.away.flag},
+          poss:m.poss, possA:100-m.poss, possBar:{width:m.poss+'%', background:accent, height:'6px'},
+          shotsLine:m.shots[0]+' – '+m.shots[1], xgLine:m.xg[0]+' – '+m.xg[1]
+        };
       }
     }
 
