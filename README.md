@@ -100,6 +100,15 @@ python3 update_matches.py --dry-run
 
 ### However,
 you can always run all them together (wont hurt):
+
+On pipeline folder
 ```bash 
 python update_imdb.py tt32915471 --output ../data/imdb/wc2026.json && python update_schedule.py && python update_matches.py
+```
+
+## Running it locally
+
+On main folder
+```bash
+python3 -m http.server 8080
 ```
