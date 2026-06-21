@@ -20,6 +20,8 @@
   ::-webkit-scrollbar-track{background:transparent}
   @keyframes isdbDrawer{from{transform:translateX(30px);opacity:0}to{transform:translateX(0);opacity:1}}
   @keyframes isdbFlagIn{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
+  .col-sublabel { display: block; }
+  @container grid-container (max-width: 480px) { .col-sublabel { display: none; } }
 </style>
 </helmet>
 
@@ -72,14 +74,14 @@
         <div style="font-family:'Saira',sans-serif;font-size:11px;color:#7d8696">{{ shownCount }} matches · {{ avgLabel }} {{ avgScore }} · {{ realCount }} rated</div>
         <div style="font-family:'Saira',sans-serif;font-size:11px;color:#7d8696">{{ sortNote }}</div>
       </div>
-      <div style="overflow-x:auto">
+      <div style="overflow-x:auto;container-type:inline-size;container-name:grid-container">
         <div data-grid style="display:grid;grid-template-columns:32px repeat(8, minmax({{ gridColMin }}, 1fr));gap:6px;align-items:start">
           <!-- corner -->
           <div></div>
           <sc-for list="{{ headers }}" as="h" hint-placeholder-count="8">
             <div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding-bottom:6px">
               <span style="font-weight:800;font-size:16px;letter-spacing:-0.5px;color:{{ h.color }}">{{ h.abbr }}</span>
-              <span style="{{ h.nameStyle }}">{{ h.name }}</span>
+              <span class="col-sublabel" style="font-family:'Saira',sans-serif;font-size:8.5px;color:#6b7280;letter-spacing:0.4px;text-align:center;white-space:nowrap">{{ h.name }}</span>
             </div>
           </sc-for>
           <!-- rows -->
@@ -215,21 +217,6 @@ class Component extends DCLogic {
     };
     this.data = null;
     this._loadData();
-    this._ro = null;
-  }
-
-  onMount(el){
-    this._ro = new ResizeObserver(entries => {
-      const w = entries[0].contentRect.width;
-      // 8 columns + 32px label + 7*6px gaps = 32+42 = 74px overhead; each col gets (w-74)/8
-      const colW = (w - 74) / 8;
-      this.setState({ narrowCols: colW < 48 });
-    });
-    const grid = el.querySelector('[data-grid]');
-    if(grid) this._ro.observe(grid);
-  }
-  onUnmount(){
-    if(this._ro) this._ro.disconnect();
   }
 
   async _loadData(){
@@ -472,18 +459,15 @@ class Component extends DCLogic {
 
     const rowLabelStyle={height:H+'px', display:'flex', alignItems:'center', justifyContent:'flex-end', paddingRight:'8px', fontFamily:"'DM Mono',monospace", fontSize:'10.5px', color:'#5b6473'};
 
-    const subLabelStyle = "font-family:'Saira',sans-serif;font-size:8.5px;color:#6b7280;letter-spacing:0.4px;text-align:center;white-space:nowrap";
-    const subLabelHide = "display:none";
-    const narrow = this.state.narrowCols;
     const headers=[
-      {abbr:'MD1', name:'GROUP D1', color:'#eef1f6', nameStyle: narrow ? subLabelHide : subLabelStyle},
-      {abbr:'MD2', name:'GROUP D2', color:'#eef1f6', nameStyle: narrow ? subLabelHide : subLabelStyle},
-      {abbr:'MD3', name:'GROUP D3', color:'#eef1f6', nameStyle: narrow ? subLabelHide : subLabelStyle},
-      {abbr:'R32', name:'ROUND OF 32', color:accent, nameStyle: narrow ? subLabelHide : subLabelStyle},
-      {abbr:'R16', name:'ROUND OF 16', color:accent, nameStyle: narrow ? subLabelHide : subLabelStyle},
-      {abbr:'QF', name:'QUARTERS', color:accent, nameStyle: narrow ? subLabelHide : subLabelStyle},
-      {abbr:'SF', name:'SEMIS', color:accent, nameStyle: narrow ? subLabelHide : subLabelStyle},
-      {abbr:'F', name:'FINAL', color:'#ff4d8d', nameStyle: narrow ? subLabelHide : subLabelStyle}
+      {abbr:'MD1', name:'GROUP D1', color:'#eef1f6'},
+      {abbr:'MD2', name:'GROUP D2', color:'#eef1f6'},
+      {abbr:'MD3', name:'GROUP D3', color:'#eef1f6'},
+      {abbr:'R32', name:'ROUND OF 32', color:accent},
+      {abbr:'R16', name:'ROUND OF 16', color:accent},
+      {abbr:'QF', name:'QUARTERS', color:accent},
+      {abbr:'SF', name:'SEMIS', color:accent},
+      {abbr:'F', name:'FINAL', color:'#ff4d8d'}
     ];
 
     const gps=['All','A','B','C','D','E','F','G','H','I','J','K','L'];
@@ -501,7 +485,7 @@ class Component extends DCLogic {
     const avgScore=ratedMatches.length?(ratedMatches.reduce((s,m)=>s+m.rating,0)/ratedMatches.length).toFixed(2):'–';
     const avgLabel=ratedMatches.length>=5?'Average':'avg';
     const avgLinePos=ratedMatches.length>=5?((parseFloat(avgScore)-3)/(9-3)*100).toFixed(1):50;
-    const sortNote = sort==='rating' ? 'ranked best → worst' : 'fixture order';
+    const sortNote = sort==='rating' ? 'ranked best → worst per stage' : 'in fixture order';
 
     const iconW = compact ? 21 : 24;
     const gridColMin = sort === 'rating' ? (iconW*2 + 36 + 16)+'px' : '0px';
