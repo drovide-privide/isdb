@@ -26,7 +26,7 @@
 <div style="min-height:100vh;background:radial-gradient(1200px 600px at 80% -10%, rgba(91,140,255,0.10), transparent 60%), #0b0d12;font-family:'Saira',system-ui,sans-serif;color:#eef1f6;padding-bottom:64px">
 
   <!-- TOP BAR -->
-  <div style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:14px 28px;background:rgba(11,13,18,0.82);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07)">
+  <div style="position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:14px clamp(10px, 3vw, 28px);background:rgba(11,13,18,0.82);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07)">
     <div style="display:flex;align-items:center;gap:11px">
       <div style="background:{{ accent }};color:#0b0e14;font-weight:800;font-size:17px;letter-spacing:-0.5px;padding:5px 9px;border-radius:8px;line-height:1">ISDb</div>
       <div style="display:flex;flex-direction:column;line-height:1.1">
@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <div style="max-width:1380px;margin:0 auto;padding:0 64px">
+  <div style="max-width:1380px;margin:0 auto;padding:0 clamp(8px, 3vw, 64px)">
 
     <!-- HEADER -->
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:16px 0 14px">
@@ -96,7 +96,7 @@
             <sc-for list="{{ row.cells }}" as="cell" hint-placeholder-count="8">
               <div class="isdb-cell" style="{{ cell.style }}" style-hover="{{ cell.hover }}" onClick="{{ cell.onClick }}" onMouseEnter="{{ cell.onEnter }}" onMouseMove="{{ cell.onMove }}" onMouseLeave="{{ cell.onLeave }}">
                 <img class="cell-flag" src="{{ cell.homeFlag }}" style="{{ cell.flagIconStyle }}" />
-                <div style="{{ cell.scoreRowStyle }}"><span style="{{ cell.dotStyle }}"></span>{{ cell.score }}</div>
+                <div style="{{ cell.scoreRowStyle }}">{{ cell.score }}</div>
                 <img class="cell-flag" src="{{ cell.awayFlag }}" style="{{ cell.flagIconStyle }}" />
               </div>
             </sc-for>
@@ -283,7 +283,6 @@ class Component extends DCLogic {
       };
     }
     const rnd = this.rng('rate'+id);
-    // Use IMDb score if available, otherwise show played match with no rating
     const rt = (typeof imdbScore === 'number' && imdbScore !== null) ? imdbScore : null;
     const col = rt !== null ? this.ratingColor(rt) : {bg:'#1a1f2a', fg:'#7d8696'};
     const tier = rt !== null ? this.tier(rt) : null;
@@ -390,7 +389,8 @@ class Component extends DCLogic {
   }
 
   pillStyle(active, accent){
-    const base={padding:'6px 11px', borderRadius:'999px', fontFamily:"'Saira',sans-serif", fontWeight:600, fontSize:'13px', cursor:'pointer', border:'1px solid', userSelect:'none', transition:'all .12s', lineHeight:1};
+    const mobile = typeof window !== 'undefined' && window.innerWidth < 640;
+    const base={padding: mobile ? '4px 7px' : '6px 11px', borderRadius:'999px', fontFamily:"'Saira',sans-serif", fontWeight:600, fontSize: mobile ? '11px' : '13px', cursor:'pointer', border:'1px solid', userSelect:'none', transition:'all .12s', lineHeight:1};
     if(active) return {...base, background:accent, color:'#0b0e14', borderColor:accent};
     return {...base, background:'#161b25', color:'#aeb6c4', borderColor:'rgba(255,255,255,0.08)'};
   }
@@ -411,7 +411,6 @@ class Component extends DCLogic {
     const colLists=order.map(k=>{
       let list=this.data.cols[k].filter(filt);
       if(sort==='rating') list=list.slice().sort((a,b)=>{
-        // push null ratings to bottom
         if(a.rating===null && b.rating===null) return 0;
         if(a.rating===null) return 1;
         if(b.rating===null) return -1;
@@ -427,34 +426,34 @@ class Component extends DCLogic {
     for(let r=0;r<maxRows;r++){
       const cells=colLists.map(list=>{
         const m=list[r];
-        if(!m) return {score:'', style:emptyStyle, dotStyle:{display:'none'}, hover:undefined, onClick:undefined, onEnter:undefined, onMove:undefined, onLeave:undefined};
+        if(!m) return {score:'', style:emptyStyle, scoreRowStyle:{display:'none'}, hover:undefined, onClick:undefined, onEnter:undefined, onMove:undefined, onLeave:undefined};
         const seld=m.id===selId;
         const stageColor = {'MD1':'rgba(238,241,246,0.18)','MD2':'rgba(238,241,246,0.18)','MD3':'rgba(238,241,246,0.18)','R32':'rgba(91,140,255,0.35)','R16':'rgba(91,140,255,0.35)','QF':'rgba(91,140,255,0.35)','SF':'rgba(91,140,255,0.35)','FIN':'rgba(255,77,141,0.45)'}[m.stageKey] ?? 'rgba(255,255,255,0.12)';
         const outline = `inset 0 1px 0 rgba(255,255,255,0.13), inset 0 -1px 0 rgba(0,0,0,0.25), 0 0 0 1px ${stageColor}`;
         const hasTeams = m.home.code !== 'TBD';
         const iconW = compact ? 21 : 24;
         const iconH = compact ? 16 : 18;
+        const showFlags = sort === 'rating' && m.rating !== null;
         const tint = (m.hasScore && m.rating !== null) ? m.bg.replace('rgb(','rgba(').replace(')',',0.30)') : 'rgba(255,255,255,0.08)';
-        const flagBase = {width:iconW+'px', height:iconH+'px', borderRadius:'4px', objectFit:'cover', flexShrink:0, transition:'opacity 0.2s ease, transform 0.2s ease', boxShadow:'inset 0 0 0 '+iconW+'px '+tint+', 0 1px 3px rgba(0,0,0,0.45)', transform:'scale(0.7)'};
-        const flagIconStyle = hasTeams ? {...flagBase, opacity:(m.isReal && m.rating !== null && sort==='rating') ? 1 : 0, transform:(m.isReal && m.rating !== null && sort==='rating') ? 'scale(1)' : 'scale(0.7)'} : {display:'none'};
+        const flagIconStyle = (hasTeams && showFlags) ? {width:iconW+'px', height:iconH+'px', borderRadius:'4px', objectFit:'cover', flexShrink:0, boxShadow:'inset 0 0 0 '+iconW+'px '+tint+', 0 1px 3px rgba(0,0,0,0.45)'} : {display:'none'};
+        // minWidth: rating sort needs 2 flags + score + padding; fixture sort just needs score
+        const minWidth = showFlags ? (iconW*2 + 36 + 16)+'px' : '28px';
         const bg = (m.hasScore && m.rating !== null) ? m.bg : (m.hasScore ? '#1a1f2a' : 'transparent');
         const fg = (m.hasScore && m.rating !== null) ? m.fg : (m.hasScore ? '#5b6473' : '#5b6473');
         const selShadow = seld ? `, 0 0 0 2px #0e121a, 0 0 0 4px ${accent}` : '';
-        const style={position:'relative', height:H+'px', borderRadius:'7px', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 6px', gap:'4px', overflow:'hidden', background:bg, color:fg, cursor:'pointer', transition:'transform .09s ease, box-shadow .09s ease', boxShadow: outline+selShadow};
-        const scoreRowStyle = {flex:1, display:'flex', alignItems:'center', justifyContent:'center', gap:'4px', fontFamily:"'DM Mono',monospace", fontSize:(compact?11:12)+'px', fontWeight:500};
-        // dot only shown when we have a real IMDb rating
-        const dotStyle = (m.isReal && m.rating !== null) ? {width:'4px', height:'4px', borderRadius:'50%', background:fg, opacity:0.75, flexShrink:0} : {display:'none'};
+        const style={position:'relative', height:H+'px', minWidth, borderRadius:'7px', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 6px', gap:'4px', overflow:'hidden', background:bg, color:fg, cursor:'pointer', transition:'transform .09s ease, box-shadow .09s ease', boxShadow: outline+selShadow};
+        const scoreRowStyle = {flex:1, display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'DM Mono',monospace", fontSize:(compact?11:12)+'px', fontWeight:500};
         const cellHoverStyle={transform:'scale(1.09)', zIndex:5, boxShadow:'0 8px 20px rgba(0,0,0,0.55)'};
         return {
           homeFlag: m.home.flag, awayFlag: m.away.flag,
           hasTeams, hasScore: m.hasScore,
           score: m.hasScore ? (m.rating !== null ? m.rating.toFixed(1) : '–') : '',
-          style, flagIconStyle, scoreRowStyle, dotStyle,
+          style, flagIconStyle, scoreRowStyle,
           hover: cellHoverStyle,
           onClick:()=>this.setState({sel:m, hover:null}),
-          onEnter:(e)=>{ this.setState({hover:{m, x:e.clientX, y:e.clientY}}); e.currentTarget.querySelectorAll('.cell-flag').forEach(f=>{ f.style.opacity='1'; f.style.transform='scale(1)'; }); },
+          onEnter:(e)=>this.setState({hover:{m, x:e.clientX, y:e.clientY}}),
           onMove:(e)=>this.setState(s=>(s.hover&&s.hover.m===m)?{hover:{m,x:e.clientX,y:e.clientY}}:null),
-          onLeave:(e)=>{ this.setState(s=>(s.hover&&s.hover.m===m)?{hover:null}:null); e.currentTarget.querySelectorAll('.cell-flag').forEach(f=>{ f.style.opacity='0'; f.style.transform='scale(0.7)'; }); }
+          onLeave:(e)=>this.setState(s=>(s.hover&&s.hover.m===m)?{hover:null}:null)
         };
       });
       rows.push({label: sort==='rating' ? '#'+(r+1) : 'M'+(r+1), cells});
@@ -477,7 +476,7 @@ class Component extends DCLogic {
     const pillHover={background:'#1f2532', color:'#dfe4ec'};
     const groupPills=gps.map(g=>{
       const s=this.pillStyle(g===grp, accent);
-      return {label:g, style: g==='All' ? {...s, padding:'6px 24px'} : s, hover: g===grp?undefined:pillHover, onClick:()=>this.setState({group:g, sel:null})};
+      return {label:g, style: g==='All' ? {...s, padding: (typeof window !== 'undefined' && window.innerWidth < 640) ? '4px 14px' : '6px 24px'} : s, hover: g===grp?undefined:pillHover, onClick:()=>this.setState({group:g, sel:null})};
     });
     const sortPills=[['order','Schedule'],['rating','Rating']].map(p=>({label:p[1], style:this.pillStyle(p[0]===sort, accent), hover: p[0]===sort?undefined:pillHover, onClick:()=>this.setState({sort:p[0]})}));
 
@@ -556,5 +555,3 @@ class Component extends DCLogic {
 </script>
 </body>
 </html>
-
-

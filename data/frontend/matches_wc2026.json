@@ -44,7 +44,7 @@
     "stadium": "BMO Field",
     "city": "Toronto",
     "country_played": "Canada",
-    "imdb_score": 5.7,
+    "imdb_score": 5.6,
     "oneline_comment": ""
   },
   {
@@ -76,7 +76,7 @@
     "stadium": "Levi's Stadium",
     "city": "Santa Clara",
     "country_played": "USA",
-    "imdb_score": 5.3,
+    "imdb_score": 5.2,
     "oneline_comment": ""
   },
   {
@@ -204,7 +204,7 @@
     "stadium": "Mercedes-Benz Stadium",
     "city": "Atlanta",
     "country_played": "USA",
-    "imdb_score": 6.2,
+    "imdb_score": 6.1,
     "oneline_comment": ""
   },
   {
@@ -252,7 +252,7 @@
     "stadium": "SoFi Stadium",
     "city": "Inglewood",
     "country_played": "USA",
-    "imdb_score": 7.1,
+    "imdb_score": 7.0,
     "oneline_comment": ""
   },
   {
@@ -332,7 +332,7 @@
     "stadium": "NRG Stadium",
     "city": "Houston",
     "country_played": "USA",
-    "imdb_score": 5.4,
+    "imdb_score": 5.3,
     "oneline_comment": ""
   },
   {
@@ -444,7 +444,7 @@
     "stadium": "Estadio Akron",
     "city": "Zapopan",
     "country_played": "Mexico",
-    "imdb_score": 5.3,
+    "imdb_score": 5.1,
     "oneline_comment": ""
   },
   {
@@ -460,7 +460,7 @@
     "stadium": "Lumen Field",
     "city": "Seattle",
     "country_played": "USA",
-    "imdb_score": 5.9,
+    "imdb_score": 5.7,
     "oneline_comment": ""
   },
   {
@@ -476,7 +476,7 @@
     "stadium": "Gillette Stadium",
     "city": "Foxborough",
     "country_played": "USA",
-    "imdb_score": 5.2,
+    "imdb_score": 5.1,
     "oneline_comment": ""
   },
   {
@@ -514,8 +514,8 @@
   {
     "home": "NED",
     "away": "SWE",
-    "hg": null,
-    "ag": null,
+    "hg": 5,
+    "ag": 1,
     "match_id": 33,
     "date": "2026-06-20",
     "time_et": "13:00",
@@ -524,14 +524,14 @@
     "stadium": "NRG Stadium",
     "city": "Houston",
     "country_played": "USA",
-    "imdb_score": null,
+    "imdb_score": 7.6,
     "oneline_comment": ""
   },
   {
     "home": "GER",
     "away": "CIV",
-    "hg": null,
-    "ag": null,
+    "hg": 2,
+    "ag": 1,
     "match_id": 34,
     "date": "2026-06-20",
     "time_et": "16:00",
@@ -540,14 +540,14 @@
     "stadium": "BMO Field",
     "city": "Toronto",
     "country_played": "Canada",
-    "imdb_score": null,
+    "imdb_score": 6.9,
     "oneline_comment": ""
   },
   {
     "home": "ECU",
     "away": "CUW",
-    "hg": null,
-    "ag": null,
+    "hg": 0,
+    "ag": 0,
     "match_id": 35,
     "date": "2026-06-20",
     "time_et": "20:00",
@@ -562,8 +562,8 @@
   {
     "home": "TUN",
     "away": "JPN",
-    "hg": null,
-    "ag": null,
+    "hg": 0,
+    "ag": 4,
     "match_id": 36,
     "date": "2026-06-20",
     "time_et": "00:00",
