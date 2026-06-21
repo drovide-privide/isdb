@@ -73,7 +73,7 @@
         <div style="font-family:'Saira',sans-serif;font-size:11px;color:#7d8696">{{ sortNote }}</div>
       </div>
       <div style="overflow-x:auto">
-        <div style="display:grid;grid-template-columns:32px repeat(8, minmax(0, 1fr));gap:6px;align-items:start">
+        <div style="display:grid;grid-template-columns:32px repeat(8, minmax({{ gridColMin }}, 1fr));gap:6px;align-items:start">
           <!-- corner -->
           <div></div>
           <sc-for list="{{ headers }}" as="h" hint-placeholder-count="8">
@@ -420,8 +420,8 @@ class Component extends DCLogic {
         const m=list[r];
         const iconW = compact ? 21 : 24;
         const iconH = compact ? 16 : 18;
-        const minWidth = sort === 'rating' ? (iconW*2 + 36 + 16)+'px' : H+'px';
-        if(!m) return {score:'', style:{...emptyStyle, minWidth}, scoreRowStyle:{display:'none'}, hover:undefined, onClick:undefined, onEnter:undefined, onMove:undefined, onLeave:undefined};
+
+        if(!m) return {score:'', style:emptyStyle, scoreRowStyle:{display:'none'}, hover:undefined, onClick:undefined, onEnter:undefined, onMove:undefined, onLeave:undefined};
         const seld=m.id===selId;
         const stageColor = {'MD1':'rgba(238,241,246,0.18)','MD2':'rgba(238,241,246,0.18)','MD3':'rgba(238,241,246,0.18)','R32':'rgba(91,140,255,0.35)','R16':'rgba(91,140,255,0.35)','QF':'rgba(91,140,255,0.35)','SF':'rgba(91,140,255,0.35)','FIN':'rgba(255,77,141,0.45)'}[m.stageKey] ?? 'rgba(255,255,255,0.12)';
         const outline = `inset 0 1px 0 rgba(255,255,255,0.13), inset 0 -1px 0 rgba(0,0,0,0.25), 0 0 0 1px ${stageColor}`;
@@ -437,7 +437,7 @@ class Component extends DCLogic {
         const bg = (m.hasScore && m.rating !== null) ? m.bg : (m.hasScore ? '#1a1f2a' : 'transparent');
         const fg = (m.hasScore && m.rating !== null) ? m.fg : (m.hasScore ? '#5b6473' : '#5b6473');
         const selShadow = seld ? `, 0 0 0 2px #0e121a, 0 0 0 4px ${accent}` : '';
-        const style={position:'relative', height:H+'px', minWidth, borderRadius:'7px', display:'flex', alignItems:'center', justifyContent:'center', padding:'0 6px', overflow:'hidden', background:bg, color:fg, cursor:'pointer', transition:'transform .09s ease, box-shadow .09s ease', boxShadow: outline+selShadow};
+        const style={position:'relative', height:H+'px', borderRadius:'7px', display:'flex', alignItems:'center', justifyContent:'center', padding:'0 6px', overflow:'hidden', background:bg, color:fg, cursor:'pointer', transition:'transform .09s ease, box-shadow .09s ease', boxShadow: outline+selShadow};
         const scoreRowStyle = {display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'DM Mono',monospace", fontSize:(compact?11:12)+'px', fontWeight:500, position:'relative', zIndex:1};
         const cellHoverStyle={transform:'scale(1.09)', zIndex:5, boxShadow:'0 8px 20px rgba(0,0,0,0.55)'};
         return {
@@ -485,6 +485,8 @@ class Component extends DCLogic {
     const avgLinePos=ratedMatches.length>=5?((parseFloat(avgScore)-3)/(9-3)*100).toFixed(1):50;
     const sortNote = sort==='rating' ? 'ranked best → worst per stage' : 'in fixture order';
 
+    const iconW = compact ? 21 : 24;
+    const gridColMin = sort === 'rating' ? (iconW*2 + 36 + 16)+'px' : '0px';
     const grad=(t)=>'linear-gradient(90deg,'+t.c1+' 0 50%,'+t.c2+' 50% 100%)';
     const scoreCol=(m,side)=> m.winner==='d' ? '#c4cbd6' : ((m.winner===side)?'#ffffff':'#7d8696');
 
@@ -542,7 +544,7 @@ class Component extends DCLogic {
     }
 
     return {
-      accent, rows, rowLabelStyle, headers, groupPills, sortPills,
+      accent, rows, rowLabelStyle, headers, groupPills, sortPills, gridColMin,
       shownCount, realCount, avgScore, avgLabel, avgLinePos, sortNote,
       hover, sel, closeDrawer:()=>this.setState({sel:null}), closeHover:{background:'#252b37', color:'#fff'}
     };
