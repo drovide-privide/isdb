@@ -12,7 +12,7 @@
     "stadium": "Estadio Azteca",
     "city": "Mexico City",
     "country_played": "Mexico",
-    "imdb_score": 6.1,
+    "imdb_score": 6.0,
     "oneline_comment": ""
   },
   {
@@ -396,7 +396,7 @@
     "stadium": "Mercedes-Benz Stadium",
     "city": "Atlanta",
     "country_played": "USA",
-    "imdb_score": 4.9,
+    "imdb_score": 4.8,
     "oneline_comment": ""
   },
   {
@@ -476,7 +476,7 @@
     "stadium": "Gillette Stadium",
     "city": "Foxborough",
     "country_played": "USA",
-    "imdb_score": 5.1,
+    "imdb_score": 5.2,
     "oneline_comment": ""
   },
   {
@@ -492,7 +492,7 @@
     "stadium": "Lincoln Financial Field",
     "city": "Philadelphia",
     "country_played": "USA",
-    "imdb_score": 6.2,
+    "imdb_score": 6.1,
     "oneline_comment": ""
   },
   {
@@ -508,7 +508,7 @@
     "stadium": "Levi's Stadium",
     "city": "Santa Clara",
     "country_played": "USA",
-    "imdb_score": 6.2,
+    "imdb_score": 6.1,
     "oneline_comment": ""
   },
   {
@@ -540,7 +540,7 @@
     "stadium": "BMO Field",
     "city": "Toronto",
     "country_played": "Canada",
-    "imdb_score": 6.9,
+    "imdb_score": 7.0,
     "oneline_comment": ""
   },
   {
@@ -556,7 +556,7 @@
     "stadium": "Arrowhead Stadium",
     "city": "Kansas City",
     "country_played": "USA",
-    "imdb_score": null,
+    "imdb_score": 6.1,
     "oneline_comment": ""
   },
   {
@@ -572,7 +572,7 @@
     "stadium": "Estadio BBVA",
     "city": "Monterrey",
     "country_played": "Mexico",
-    "imdb_score": null,
+    "imdb_score": 7.0,
     "oneline_comment": ""
   },
   {
